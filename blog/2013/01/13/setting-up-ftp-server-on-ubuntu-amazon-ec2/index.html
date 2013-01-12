@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Converting between different SSH private/public key formats. - My Octopress Blog</title>
+  <title>Setting up FTP Server on Ubuntu - Amazon EC2 - My Octopress Blog</title>
   <meta name="author" content="Yonggang Luo">
 
   
-  <meta name="description" content="PuTTY &#8211;> SSH PuTTY private key to SSH public key and private key.
-puttygen supports exporting to an OpenSSH compatible format. Open PuttyGen &hellip;">
+  <meta name="description" content="Permalink File Transfer Protocol (FTP) is a TCP protocol for uploading and downloading files between computers. FTP works on a client/server model. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ puttygen supports exporting to an OpenSSH compatible format. Open PuttyGen &hell
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lygstate.github.com/blog/2013/01/12/converting-between-different-ssh-private-slash-public-key-formats/">
+  <link rel="canonical" href="http://lygstate.github.com/blog/2013/01/13/setting-up-ftp-server-on-ubuntu-amazon-ec2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -68,7 +67,7 @@ puttygen supports exporting to an OpenSSH compatible format. Open PuttyGen &hell
   
   <header>
     
-      <h1 class="entry-title">Converting Between Different SSH Private/public Key Formats.</h1>
+      <h1 class="entry-title">Setting Up FTP Server on Ubuntu - Amazon EC2</h1>
     
     
       <p class="meta">
@@ -84,38 +83,53 @@ puttygen supports exporting to an OpenSSH compatible format. Open PuttyGen &hell
   
 
 
-<time datetime="2013-01-12T16:00:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2013</time>
+<time datetime="2013-01-13T02:16:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>PuTTY &#8211;> SSH</h2>
+<div class="entry-content"><p><a href="http://curiousdeveloper.blogspot.com/2008/07/setting-up-ftp-server-on-ubuntu-amazon.html" title="Permalink to Setting up FTP Server on Ubuntu - Amazon EC2">Permalink</a></p>
 
-<ul>
-<li>PuTTY private key to SSH public key and private key.<br/>
-<code>puttygen</code> supports exporting to an OpenSSH compatible format.
+<p>File Transfer Protocol (FTP) is a TCP protocol for uploading and downloading files between computers. FTP works on a client/server model. The server component is called an <em>FTP daemon</em>. It continuously listens for FTP requests from remote clients. When a request is received, it manages the the login and sets up the connection. For the duration of the session it executes any of commands sent by the FTP client.</p>
 
-<ol>
-<li>Open PuttyGen</li>
-<li>Click Load</li>
-<li>Load your private key</li>
-<li>Go to <code>Conversions-&gt;Export OpenSSH</code> and export your private key</li>
-<li>Copy your private key to <code>~/.ssh/id_dsa</code> (or <code>id_rsa</code>).</li>
-<li>Create the RFC 4716 version of the public key using <code>ssh-keygen</code>:<br />
-<code>ssh-keygen -e -f ~/.ssh/id_dsa &gt; ~/.ssh/id_dsa_com.pub</code></li>
-<li>Convert the RFC 4716 version of the public key to the OpenSSH format:<br />
-<code>ssh-keygen -i -f ~/.ssh/id_dsa_com.pub &gt; ~/.ssh/id_dsa.pub</code></li>
-</ol>
-</li>
-<li>PuTTY public key to SSH public key<br/>
-If all you have is a public key from a user in PuTTY-style format, you can convert it to standard openssh format like so:<br/>
-<code>ssh-keygen -i -f keyfile.pub &gt; newkeyfile.pub</code></li>
-</ul>
+<p>Access to an FTP server can be managed in two ways:</p>
 
+<p>In the Anonymous mode, remote clients can access the FTP server by using the default user account called &#8216;anonymous&#8221; or &#8220;ftp&#8221; and sending an email address as the password. In the Authenticated mode a user must have an account and a password. User access to the FTP server directories and files is dependent on the permissions defined for the account used at login. As a general rule, the FTP daemon will hide the root directory of the FTP server and change it to the FTP Home directory. This hides the rest of the file system from remote sessions.</p>
 
-<p>See <a href="http://linux-sxs.org/networking/openssh.putty.html">this</a> and <a href="http://www.wellsi.com/sme/ssh/ssh.html">this</a> for more information.</p>
+<h2>Amazon EC2: Unblock FTP port</h2>
+
+<p>FTP works on port 21 by default. This port is blocked by the AWS firewall. You must unblock this port (21) by changing the instance permissions prior to setting up FTP so that you can access FTP remotely. This can be done using the AWS EC2 Elastic Fox client. Please refer to my other post about Unblocking ports on the Amazon EC2 for more details.</p>
+
+<h2>vsftpd - FTP Server Installation</h2>
+
+<p>vsftpd is an FTP daemon available in Ubuntu. It is easy to install, set up, and maintain. To install <strong>vsftpd</strong> you can run the following command:<br/>
+<code>sudo apt-get install vsftpd</code></p>
+
+<h2>vsftpd - FTP Server Configuration</h2>
+
+<p>You can edit the vsftpd configuration file, <code>sudo vi /etc/vsftpd.conf</code>, to change the default settings. By default only anonymous FTP is allowed. If you wish to disable this option, you should change the following line:<br/>
+<code>anonymous_enable=YES</code><br/>
+to<br/>
+<code>anonymous_enable=NO</code></p>
+
+<p>By default, local system users are not allowed to login to FTP server. To change this setting, you should uncomment the following line:<br/>
+<code>#local_enable=YES</code></p>
+
+<p>By default, users are allowed to download files from FTP server. They are not allowed to upload files to FTP server. To change this setting, you should uncomment the following line:<br/>
+<code>#write_enable=YES</code></p>
+
+<p>Similarly, by default, the anonymous users are not allowed to upload files to FTP server. To change this setting, you should uncomment the following line:<br/>
+<code>#anon\_upload\_enable=YES</code></p>
+
+<p>The configuration file consists of many configuration parameters. The information about each parameter is available in the configuration file. Alternatively, you can refer to the man page, <strong>man 5 vsftpd.conf</strong> for details of each parameter.</p>
+
+<p>Once you configure <strong>vsftpd</strong> you can start the daemon. You can run following command to run the <strong>vsftpd</strong> daemon:</p>
+
+<p><code>sudo /etc/init.d/vsftpd start</code></p>
+
+<p>Please note that the defaults in the configuration file are set as they are for security reasons. Each of the above changes makes the system a little less secure, so make them only if you need them.</p>
 </div>
 
 
@@ -138,21 +152,15 @@ If all you have is a public key from a user in PuTTY-style format, you can conve
   
 
 
-<time datetime="2013-01-12T16:00:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2013</time>
+<time datetime="2013-01-13T02:16:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/putty/'>putty</a>, <a class='category' href='/blog/categories/ssh/'>ssh</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lygstate.github.com/blog/2013/01/12/converting-between-different-ssh-private-slash-public-key-formats/" data-via="" data-counturl="http://lygstate.github.com/blog/2013/01/12/converting-between-different-ssh-private-slash-public-key-formats/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lygstate.github.com/blog/2013/01/13/setting-up-ftp-server-on-ubuntu-amazon-ec2/" data-via="" data-counturl="http://lygstate.github.com/blog/2013/01/13/setting-up-ftp-server-on-ubuntu-amazon-ec2/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -165,8 +173,8 @@ If all you have is a public key from a user in PuTTY-style format, you can conve
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/01/13/show-all-running-processes-in-linux/" title="Previous Post: Show All Running Processes in Linux">&laquo; Show All Running Processes in Linux</a>
       
-        <a class="basic-alignment right" href="/blog/2013/01/12/building-a-socks-proxy-on-ec2/" title="Next Post: Building a SOCKS proxy on EC2">Building a SOCKS proxy on EC2 &raquo;</a>
       
     </p>
   </footer>

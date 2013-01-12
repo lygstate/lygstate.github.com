@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://lygstate.github.com/atom.xml" rel="self"/>
   <link href="http://lygstate.github.com/"/>
-  <updated>2013-01-13T01:58:49+08:00</updated>
+  <updated>2013-01-13T02:47:19+08:00</updated>
   <id>http://lygstate.github.com/</id>
   <author>
     <name><![CDATA[Yonggang Luo]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Setting up FTP Server on Ubuntu - Amazon EC2]]></title>
+    <link href="http://lygstate.github.com/blog/2013/01/13/setting-up-ftp-server-on-ubuntu-amazon-ec2/"/>
+    <updated>2013-01-13T02:16:00+08:00</updated>
+    <id>http://lygstate.github.com/blog/2013/01/13/setting-up-ftp-server-on-ubuntu-amazon-ec2</id>
+    <content type="html"><![CDATA[<p><a href="http://curiousdeveloper.blogspot.com/2008/07/setting-up-ftp-server-on-ubuntu-amazon.html" title="Permalink to Setting up FTP Server on Ubuntu - Amazon EC2">Permalink</a></p>
+
+<p>File Transfer Protocol (FTP) is a TCP protocol for uploading and downloading files between computers. FTP works on a client/server model. The server component is called an <em>FTP daemon</em>. It continuously listens for FTP requests from remote clients. When a request is received, it manages the the login and sets up the connection. For the duration of the session it executes any of commands sent by the FTP client.</p>
+
+<p>Access to an FTP server can be managed in two ways:</p>
+
+<p>In the Anonymous mode, remote clients can access the FTP server by using the default user account called &#8216;anonymous&#8221; or &#8220;ftp&#8221; and sending an email address as the password. In the Authenticated mode a user must have an account and a password. User access to the FTP server directories and files is dependent on the permissions defined for the account used at login. As a general rule, the FTP daemon will hide the root directory of the FTP server and change it to the FTP Home directory. This hides the rest of the file system from remote sessions.</p>
+
+<h2>Amazon EC2: Unblock FTP port</h2>
+
+<p>FTP works on port 21 by default. This port is blocked by the AWS firewall. You must unblock this port (21) by changing the instance permissions prior to setting up FTP so that you can access FTP remotely. This can be done using the AWS EC2 Elastic Fox client. Please refer to my other post about Unblocking ports on the Amazon EC2 for more details.</p>
+
+<h2>vsftpd - FTP Server Installation</h2>
+
+<p>vsftpd is an FTP daemon available in Ubuntu. It is easy to install, set up, and maintain. To install <strong>vsftpd</strong> you can run the following command:<br/>
+<code>sudo apt-get install vsftpd</code></p>
+
+<h2>vsftpd - FTP Server Configuration</h2>
+
+<p>You can edit the vsftpd configuration file, <code>sudo vi /etc/vsftpd.conf</code>, to change the default settings. By default only anonymous FTP is allowed. If you wish to disable this option, you should change the following line:<br/>
+<code>anonymous_enable=YES</code><br/>
+to<br/>
+<code>anonymous_enable=NO</code></p>
+
+<p>By default, local system users are not allowed to login to FTP server. To change this setting, you should uncomment the following line:<br/>
+<code>#local_enable=YES</code></p>
+
+<p>By default, users are allowed to download files from FTP server. They are not allowed to upload files to FTP server. To change this setting, you should uncomment the following line:<br/>
+<code>#write_enable=YES</code></p>
+
+<p>Similarly, by default, the anonymous users are not allowed to upload files to FTP server. To change this setting, you should uncomment the following line:<br/>
+<code>#anon\_upload\_enable=YES</code></p>
+
+<p>The configuration file consists of many configuration parameters. The information about each parameter is available in the configuration file. Alternatively, you can refer to the man page, <strong>man 5 vsftpd.conf</strong> for details of each parameter.</p>
+
+<p>Once you configure <strong>vsftpd</strong> you can start the daemon. You can run following command to run the <strong>vsftpd</strong> daemon:</p>
+
+<p><code>sudo /etc/init.d/vsftpd start</code></p>
+
+<p>Please note that the defaults in the configuration file are set as they are for security reasons. Each of the above changes makes the system a little less secure, so make them only if you need them.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Show All Running Processes in Linux]]></title>
