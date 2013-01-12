@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Install Windows with ISO image by the help of GRUB. - My Octopress Blog</title>
+  <meta name="author" content="Yonggang Luo">
+
+  
+  <meta name="description" content="Permalink 本方法适合硬盘、移动硬盘、u盘、usb读卡器等可启动介质安装 Windows vista、Windows 2008、Windows 7 全系列（X86、AMD64）系统。本方法和DVD光驱安装没有太大的差别，只是启动和中间会用到grub4dos/ImDisk来虚拟光驱; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lygstate.github.com/blog/2013/01/13/install-windows-with-iso-image-by-the-help-of-grub/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lygstate.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Install Windows With ISO Image by the Help of GRUB.</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-13T03:06:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://bbs.wuyou.com/viewthread.php?tid=148722" title="Windows Vista/2008/7全系列（x86、x64）ISO镜像文件硬盘安装方法">Permalink</a></p>
+
+<p>本方法适合硬盘、移动硬盘、u盘、usb读卡器等可启动介质安装 Windows vista、Windows 2008、Windows 7 全系列（X86、AMD64）系统。本方法和DVD光驱安装没有太大的差别，只是启动和中间会用到grub4dos/ImDisk来虚拟光驱; 还有本文中选用ImDisk作虚拟光驱软件， 是因为自己在别的WinPE里接触过，在别的方面也常用，大家可以选择适合自己的来代替都是可以的， ImDisk是我在x86/x64（2008/win7）上都测试过的。下面以 <code>VMWare虚拟硬盘中+win7p64.iso</code> 为例</p>
+
+<h5>软件需求：</h5>
+
+<ul>
+<li><code>Windows ISO镜像</code> 在此为<code>win7p64.iso</code>。 (<code>Windows Vista、Windows 2008、Windows7 全系列（x86、x64）都可以</code>)，推荐放置在硬盘/移动硬盘上（速度快），此例中放在<code>VMWare虚拟硬盘中</code>， 以下以<code>硬盘</code>简称</li>
+<li><a href="http://download.gna.org/grubutil/grubinst-1.1-bin-w32-2008-01-01.zip">grubinst</a> 用于<code>硬盘</code>引导扇区的写入。</li>
+<li><a href="http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip">grub4dos</a> 需要做成可启动的，可在硬盘、移动硬盘、u盘、usb读卡器、光盘、pxe服务器上。<br/>
+如果ISO文件在usb设备上，grub4dos也应该装在同一个设备（大家可以试一试别的，能找到iso文件就行）</li>
+<li><a href="http://www.ltr-data.se/opencode.html/#ImDisk">ImDisk</a> 直接下载原版；默认带有x86、x64驱动，所以可以直接用于x86、x64版本安装。</li>
+<li><a href="http://technet.microsoft.com/en-us/Sysinternals/Bb897428.aspx">Contig</a> 使文件以连续的方式存储。</li>
+</ul>
+
+
+<h5><strong>安装示例：</strong></h5>
+
+<p>为了方便抓图，这里在VMware里用第二块硬盘模仿移动硬盘操作</p>
+
+<h6>制作U盘</h6>
+
+<ul>
+<li>解压缩下载到的<a href="http://download.gna.org/grubutil/grubinst-1.1-bin-w32-2008-01-01.zip">grubinst</a>， 执行里面的grubinst_gui.exe，（以管理员模式运行），选择要写入的<code>磁盘</code>（这里是U盘）,点击<code>安装</code>。</li>
+<li>解压缩下载到的<a href="http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip">grub4dos</a>， 复制里面的文件到U盘根目录下。<code>删除根目录下的menu.lst(让其自动进入命令模式)</code></li>
+<li>解压缩下载到的<a href="http://www.ltr-data.se/opencode.html/#ImDisk">ImDisk</a>; 如果是可执行文件，照样可以解压缩。复制里面的文件到U盘根目录下</li>
+<li>复制win7p64.iso到U盘根目录</li>
+<li><p>解压缩下载到的<a href="http://technet.microsoft.com/en-us/Sysinternals/Bb897428.aspx">Contig</a>，复制Contig.exe到U盘根目录， 执行以下命令:</p>
+
+<pre><code>  cd U盘根目录
+  Contig.exe win7p64.iso
+</code></pre>
+
+<p>Contig.exe的意义是为了让win7p64.iso连续存储； grub4dos需要调用 <code>map /win7p64.iso</code>，而文件win7p64.iso比较大，故这里不准备在grub4dos里把它整个map到内存；所以必须保证它在磁盘上是连续存放的，否则执行<code>map /win7p64.iso</code>会失败。</p></li>
+</ul>
+
+
+<h6><strong>U盘目录结构:</strong></h6>
+
+<pre><code>U盘
+│  badgrub.exe
+│  bootlace.com
+│  ChangeLog_GRUB4DOS.txt
+│  config.sys
+│  COPYING
+│  default
+│  Get_Source_of_This_Build.txt
+│  gpl.txt
+│  grldr
+│  grldr.mbr
+│  grub.exe
+│  grub.pif
+│  hmload.com
+│  imdisk.inf
+│  install.cmd
+│  menu.lst
+│  msgbox.exe
+│  readme.txt
+│  README_GRUB4DOS.txt
+│  runwait.exe
+│  win7p64.iso
+│
+├─awealloc
+│  ├─amd64
+│  │      awealloc.sys
+│  │
+│  ├─i386
+│  │      awealloc.sys
+│  │
+│  └─ia64
+│          awealloc.sys
+│
+├─chinese
+│      badgrub.exe
+│      grldr
+│      grub.exe
+│
+├─cli
+│  ├─amd64
+│  │      imdisk.exe
+│  │
+│  ├─i386
+│  │      imdisk.exe
+│  │
+│  └─ia64
+│          imdisk.exe
+│
+├─cpl
+│  ├─amd64
+│  │      imdisk.cpl
+│  │
+│  ├─i386
+│  │      imdisk.cpl
+│  │
+│  └─ia64
+│          imdisk.cpl
+│
+├─svc
+│  ├─amd64
+│  │      imdsksvc.exe
+│  │
+│  ├─i386
+│  │      imdsksvc.exe
+│  │
+│  └─ia64
+│          imdsksvc.exe
+│
+└─sys
+    ├─amd64
+    │      imdisk.sys
+    │
+    ├─i386
+    │      imdisk.sys
+    │
+    └─ia64
+            imdisk.sys
+</code></pre>
+
+<h6><strong>安装操作系统:</strong></h6>
+
+<ol>
+<li>设置BIOS引导盘（当前为<code>硬盘</code>，也可以是U盘或是其他做好的安装盘); 电脑启动到grub4dos界面（图1）：<br/>
+<img src="/images/2013/01/13/grub-init-interface.png" alt="Grub Init Interface" /></li>
+<li><p>在GRUB命令模式下执行以下命令：</p>
+
+<pre><code> find --set-root /win7p64.iso  
+ map /win7p64.iso (0xff)  
+ map --hook  
+ chainloader (0xff)  
+ boot
+</code></pre>
+
+<p>执行情况如下图所示（图2）:<br/>
+<img src="/images/2013/01/13/grub-commands.png" alt="Grub Commands" /></p></li>
+<li>下面进入正常的Win7安装,直到下图所示界面（图3）:<br/>
+<img src="/images/2013/01/13/grub-no-dvd-error.jpg" alt="No CD/DVD" /></li>
+<li><p>上一步就因为找不到真实的光驱,所以报错,此时点击<code>Shift+F10</code>调出CMD窗口， 通过imdisk挂载<code>win7p64.iso</code>为虚拟光驱;执行以下一系列命令:</p>
+
+<pre><code> pushd D: (您那里可能是E: F:，即VMware虚拟硬盘所在的盘符,此为注释)
+ rundll32.exe setupapi.dll,InstallHinfSection DefaultInstall 132 .\imdisk.inf (安装驱动，稍等几秒,等待安装成功,很快的)  
+ imdisk -a -f "win7p64.iso" -m #:
+</code></pre>
+
+<p>执行情况如下图所示:<br/>
+<img src="/images/2013/01/13/grub-install-dvd.jpg" alt="Install Virtual DVD" /></p></li>
+<li>执行完上一步,关闭cmd窗口,再关闭另外的可看到的那几个窗口,会返回到（图4）<br/>
+<img src="/images/2013/01/13/grub-os-start-install.jpg" alt="Start Install OS" /></li>
+<li>点击&#8221;现在安装&#8221;,以下就和DVD光盘安装一样了,后面在重新启动机器的时候可以拔掉移动硬盘或USB设备(防止再从安装盘启动)</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Yonggang Luo</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-13T03:06:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lygstate.github.com/blog/2013/01/13/install-windows-with-iso-image-by-the-help-of-grub/" data-via="" data-counturl="http://lygstate.github.com/blog/2013/01/13/install-windows-with-iso-image-by-the-help-of-grub/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/13/sftp-access-to-amazon-ec2-using-filezilla/" title="Previous Post: SFTP Access To Amazon EC2 Using FileZilla">&laquo; SFTP Access To Amazon EC2 Using FileZilla</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/13/install-windows-with-iso-image-by-the-help-of-grub/">Install Windows with ISO image by the help of GRUB.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/13/sftp-access-to-amazon-ec2-using-filezilla/">SFTP Access To Amazon EC2 Using FileZilla</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/13/setting-up-ftp-server-on-ubuntu-amazon-ec2/">Setting up FTP Server on Ubuntu - Amazon EC2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/13/show-all-running-processes-in-linux/">Show All Running Processes in Linux</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/12/building-a-socks-proxy-on-ec2/">Building a SOCKS proxy on EC2</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Yonggang Luo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
