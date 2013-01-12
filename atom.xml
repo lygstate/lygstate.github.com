@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://lygstate.github.com/atom.xml" rel="self"/>
   <link href="http://lygstate.github.com/"/>
-  <updated>2013-01-13T05:22:30+08:00</updated>
+  <updated>2013-01-13T05:38:19+08:00</updated>
   <id>http://lygstate.github.com/</id>
   <author>
     <name><![CDATA[Yonggang Luo]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Install Windows with ISO image by the help of GRUB.]]></title>
+    <title type="html"><![CDATA[Windows Vista/2008/7全系列（x86、x64）ISO镜像文件硬盘安装方法]]></title>
     <link href="http://lygstate.github.com/blog/2013/01/13/install-windows-with-iso-image-by-the-help-of-grub/"/>
     <updated>2013-01-13T03:06:00+08:00</updated>
     <id>http://lygstate.github.com/blog/2013/01/13/install-windows-with-iso-image-by-the-help-of-grub</id>
