@@ -25,37 +25,39 @@ Doing this assumes that you temporarily have an internet connection that is unre
 5. Fire up an Ubuntu 12.04 LTS instance (micro will usually do) with your keypair and Security Group
 6. SSH into the new machine with the SSH key (default username: ubuntu)
 7. Run the following commands at the prompt or in a shell script:
-	sudo apt-get install build-essential
-	wget http://www.inet.no/dante/files/dante-1.3.2.tar.gz # or another version
-	tar -zxvf dante-1.3.2.tar.gz
-	cd dante-1.3.2
-	./configure
-	make
-	sudo make install
-	$ sudo make me a sandwich
-	
+
+		sudo apt-get install build-essential
+		wget http://www.inet.no/dante/files/dante-1.3.2.tar.gz # or another version
+		tar -zxvf dante-1.3.2.tar.gz
+		cd dante-1.3.2
+		./configure
+		make
+		sudo make install
+		$ sudo make me a sandwich
+			
 8. Put the following config in /etc/sock.conf
-	## general configuration (taken from FAQ)
-	
-	internal: eth0 port = 443
-	external: eth0
-	method: username none
-	user.privileged: root
-	user.unprivileged: nobody
-	logoutput: stderr
-	
-	## client access rules
-	
-	client pass { from: 0.0.0.0/0 to: 0.0.0.0/0 } # address-range on internal nic.
-	
-	
-	## server operation access rules
-	
-	# block connections to localhost, or they will appear to come from the proxy.
-	block { from: 0.0.0.0/0 to: lo log: connect }
-	
-	# allow the rest
-	pass { from: 0.0.0.0/0 to: 0.0.0.0/0 }
+
+		## general configuration (taken from FAQ)
+		
+		internal: eth0 port = 443
+		external: eth0
+		method: username none
+		user.privileged: root
+		user.unprivileged: nobody
+		logoutput: stderr
+		
+		## client access rules
+		
+		client pass { from: 0.0.0.0/0 to: 0.0.0.0/0 } # address-range on internal nic.
+		
+		
+		## server operation access rules
+		
+		# block connections to localhost, or they will appear to come from the proxy.
+		block { from: 0.0.0.0/0 to: lo log: connect }
+		
+		# allow the rest
+		pass { from: 0.0.0.0/0 to: 0.0.0.0/0 }
 	
 9.  Run `sudo sockd -D`
 
