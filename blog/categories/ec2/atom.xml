@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ec2 | My Octopress Blog]]></title>
+  <link href="http://lygstate.github.com/blog/categories/ec2/atom.xml" rel="self"/>
+  <link href="http://lygstate.github.com/"/>
+  <updated>2013-01-12T22:17:01+08:00</updated>
+  <id>http://lygstate.github.com/</id>
+  <author>
+    <name><![CDATA[Yonggang Luo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Building a SOCKS proxy on EC2]]></title>
+    <link href="http://lygstate.github.com/blog/2013/01/12/building-a-socks-proxy-on-ec2/"/>
+    <updated>2013-01-12T21:15:00+08:00</updated>
+    <id>http://lygstate.github.com/blog/2013/01/12/building-a-socks-proxy-on-ec2</id>
+    <content type="html"><![CDATA[<p><a href="http://eric.gerlach.ca/blog/2012/6/19/building-a-socks-proxy-on-ec2-to-get-around-wifi-port-blocki.html">Permalink</a></p>
+
+<p>At the NXNE Mobile Hackathon, we ran into a small problem. The wifi set up in the room would only allow connections over HTTP and HTTPS, which made it impossible to do many things you might want to do at a hackathon, like:</p>
+
+<ol>
+<li>Push to GitHub over SSH</li>
+<li>Connect to MongoDB instances</li>
+<li>Connect to... anything... that isn't on ports 80 or 443... so a lot.</li>
+</ol>
+
+
+<p>If you can configure your tools correctly, the easiest way to get around this kind of problem is via a SOCKS proxy. Normally, I'd set up an SSH tunnel and run the SOCKS proxy over that... but no SSH. So the next best thing is to get a SOCKS server running on EC2. Let's go through the steps required to set this up so that if you end up in the same situation, you can help those around you.</p>
+
+<p>Doing this assumes that you temporarily have an internet connection that is unrestricted, like a tethered smartphone or a wired connection. I'm also assuming that you know your way around EC2 a bit.</p>
+
+<ol>
+<li>Connect to your unrestricted internet connection</li>
+<li>Login to EC2</li>
+<li>Ensure that you have a keypair setup</li>
+<li>Create an EC2 Security Group that opens ports 22 and 443 to the world</li>
+<li>Fire up an Ubuntu 12.04 LTS instance (micro will usually do) with your keypair and Security Group</li>
+<li>SSH into the new machine with the SSH key (default username: ubuntu)</li>
+<li><p>Run the following commands at the prompt or in a shell script:</p>
+
+<pre><code>sudo apt-get install build-essential
+wget http://www.inet.no/dante/files/dante-1.3.2.tar.gz # or another version
+tar -zxvf dante-1.3.2.tar.gz
+cd dante-1.3.2
+./configure
+make
+sudo make install
+$ sudo make me a sandwich
+</code></pre></li>
+<li><p>Put the following config in /etc/sock.conf</p>
+
+<pre><code>## general configuration (taken from FAQ)
+
+internal: eth0 port = 443
+external: eth0
+method: username none
+user.privileged: root
+user.unprivileged: nobody
+logoutput: stderr
+
+## client access rules
+
+client pass { from: 0.0.0.0/0 to: 0.0.0.0/0 } # address-range on internal nic.
+
+
+## server operation access rules
+
+# block connections to localhost, or they will appear to come from the proxy.
+block { from: 0.0.0.0/0 to: lo log: connect }
+
+# allow the rest
+pass { from: 0.0.0.0/0 to: 0.0.0.0/0 }
+</code></pre></li>
+<li><p>Run <code>sudo sockd -D</code></p></li>
+</ol>
+
+
+<p>Now that we've got the server running, we have to configure our clients to connect to it. Fortunately, this is relatively easy. If you're on linux, run your programs with tsocks. On Windows or Mac, you can try Proxifier (never tried it myself). Remember that the proxy is on port 443.</p>
+
+<p>If you're using PuTTY, you can set your proxy under Connection &gt; Proxy.</p>
+
+<p>This set of steps creates an open proxy that anyone can use to proxy to anywhere. Don't leave it running unless you want really big EC2 bills.</p>
+
+<p>In doing this, I realized that it would be even better to be able to do this via a VPN instead of a SOCKS proxy in order to get better Windows and Mac full capture support. I'm going to play with this idea and post again when I've got something.</p>
+]]></content>
+  </entry>
+  
+</feed>

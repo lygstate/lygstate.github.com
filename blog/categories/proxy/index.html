@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Converting between different SSH private/public key formats. - My Octopress Blog</title>
+  <title>Category: proxy - My Octopress Blog</title>
   <meta name="author" content="Yonggang Luo">
 
   
-  <meta name="description" content="PuTTY &#8211;> SSH PuTTY private key to SSH public key and private key.
-puttygen supports exporting to an OpenSSH compatible format. Open PuttyGen &hellip;">
+  <meta name="description" content="Category: proxy">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ puttygen supports exporting to an OpenSSH compatible format. Open PuttyGen &hell
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lygstate.github.com/blog/2013/01/12/converting-between-different-ssh-private-slash-public-key-formats/">
+  <link rel="canonical" href="http://lygstate.github.comblog/categories/proxy/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,112 +63,35 @@ puttygen supports exporting to an OpenSSH compatible format. Open PuttyGen &hell
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Converting Between Different SSH Private/public Key Formats.</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-12T16:00:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2013</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Proxy</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-<div class="entry-content"><h2>PuTTY &#8211;> SSH</h2>
 
-<ul>
-<li>PuTTY private key to SSH public key and private key.<br/>
-<code>puttygen</code> supports exporting to an OpenSSH compatible format.
+  
+  <h2>2013</h2>
 
-<ol>
-<li>Open PuttyGen</li>
-<li>Click Load</li>
-<li>Load your private key</li>
-<li>Go to <code>Conversions-&gt;Export OpenSSH</code> and export your private key</li>
-<li>Copy your private key to <code>~/.ssh/id_dsa</code> (or <code>id_rsa</code>).</li>
-<li>Create the RFC 4716 version of the public key using <code>ssh-keygen</code>:<br />
-<code>ssh-keygen -e -f ~/.ssh/id_dsa &gt; ~/.ssh/id_dsa_com.pub</code></li>
-<li>Convert the RFC 4716 version of the public key to the OpenSSH format:<br />
-<code>ssh-keygen -i -f ~/.ssh/id_dsa_com.pub &gt; ~/.ssh/id_dsa.pub</code></li>
-</ol>
-</li>
-<li>PuTTY public key to SSH public key<br/>
-If all you have is a public key from a user in PuTTY-style format, you can convert it to standard openssh format like so:<br/>
-<code>ssh-keygen -i -f keyfile.pub &gt; newkeyfile.pub</code></li>
-</ul>
+<article>
+  
+<h1><a href="/blog/2013/01/12/building-a-socks-proxy-on-ec2/">Building a SOCKS proxy on EC2</a></h1>
+<time datetime="2013-01-12T21:15:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>12</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/ec2/'>ec2</a>, <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/socks/'>socks</a></span>
+</footer>
 
 
-<p>See <a href="http://linux-sxs.org/networking/openssh.putty.html">this</a> and <a href="http://www.wellsi.com/sme/ssh/ssh.html">this</a> for more information.</p>
+</article>
+
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Yonggang Luo</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-12T16:00:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2013</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/putty/'>putty</a>, <a class='category' href='/blog/categories/ssh/'>ssh</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lygstate.github.com/blog/2013/01/12/converting-between-different-ssh-private-slash-public-key-formats/" data-via="" data-counturl="http://lygstate.github.com/blog/2013/01/12/converting-between-different-ssh-private-slash-public-key-formats/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/01/12/building-a-socks-proxy-on-ec2/" title="Next Post: Building a SOCKS proxy on EC2">Building a SOCKS proxy on EC2 &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
 </div>
