@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ec2 | My Octopress Blog]]></title>
   <link href="http://lygstate.github.com/blog/categories/ec2/atom.xml" rel="self"/>
   <link href="http://lygstate.github.com/"/>
-  <updated>2013-01-13T01:36:44+08:00</updated>
+  <updated>2013-01-13T01:58:49+08:00</updated>
   <id>http://lygstate.github.com/</id>
   <author>
     <name><![CDATA[Yonggang Luo]]></name>
@@ -40,36 +40,41 @@
 <li>Create an EC2 Security Group that opens ports 22 and 443 to the world</li>
 <li>Fire up an Ubuntu 12.04 LTS instance (micro will usually do) with your keypair and Security Group</li>
 <li>SSH into the new machine with the SSH key (default username: ubuntu)</li>
-<li><p>Run the following commands at the prompt or in a shell script:
- sudo apt-get install build-essential
+<li><p>Run the following commands at the prompt or in a shell script:</p>
+
+<pre><code> sudo apt-get install build-essential
  wget http://www.inet.no/dante/files/dante-1.3.2.tar.gz # or another version
  tar -zxvf dante-1.3.2.tar.gz
  cd dante-1.3.2
  ./configure
  make
  sudo make install
- $ sudo make me a sandwich</p></li>
-<li><p>Put the following config in /etc/sock.conf
- ## general configuration (taken from FAQ)</p>
+ $ sudo make me a sandwich
+</code></pre></li>
+<li><p>Put the following config in /etc/sock.conf</p>
 
-<p> internal: eth0 port = 443
+<pre><code> ## general configuration (taken from FAQ)
+
+ internal: eth0 port = 443
  external: eth0
  method: username none
  user.privileged: root
  user.unprivileged: nobody
- logoutput: stderr</p>
+ logoutput: stderr
 
-<p> ## client access rules</p>
+ ## client access rules
 
-<p> client pass { from: 0.0.0.0/0 to: 0.0.0.0/0 } # address-range on internal nic.</p>
+ client pass { from: 0.0.0.0/0 to: 0.0.0.0/0 } # address-range on internal nic.
 
-<p> ## server operation access rules</p>
 
-<p> # block connections to localhost, or they will appear to come from the proxy.
- block { from: 0.0.0.0/0 to: lo log: connect }</p>
+ ## server operation access rules
 
-<p> # allow the rest
- pass { from: 0.0.0.0/0 to: 0.0.0.0/0 }</p></li>
+ # block connections to localhost, or they will appear to come from the proxy.
+ block { from: 0.0.0.0/0 to: lo log: connect }
+
+ # allow the rest
+ pass { from: 0.0.0.0/0 to: 0.0.0.0/0 }
+</code></pre></li>
 <li><p>Run <code>sudo sockd -D</code></p></li>
 </ol>
 
