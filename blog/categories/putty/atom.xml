@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: ssh | My Octopress Blog]]></title>
-  <link href="http://lygstate.github.com/blog/categories/ssh/atom.xml" rel="self"/>
+  <title><![CDATA[Category: putty | My Octopress Blog]]></title>
+  <link href="http://lygstate.github.com/blog/categories/putty/atom.xml" rel="self"/>
   <link href="http://lygstate.github.com/"/>
   <updated>2013-01-12T19:47:22+08:00</updated>
   <id>http://lygstate.github.com/</id>
