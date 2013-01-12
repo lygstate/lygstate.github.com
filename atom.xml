@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://lygstate.github.com/atom.xml" rel="self"/>
   <link href="http://lygstate.github.com/"/>
-  <updated>2013-01-13T02:47:19+08:00</updated>
+  <updated>2013-01-13T03:01:19+08:00</updated>
   <id>http://lygstate.github.com/</id>
   <author>
     <name><![CDATA[Yonggang Luo]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SFTP Access To Amazon EC2 Using FileZilla]]></title>
+    <link href="http://lygstate.github.com/blog/2013/01/13/sftp-access-to-amazon-ec2-using-filezilla/"/>
+    <updated>2013-01-13T02:48:00+08:00</updated>
+    <id>http://lygstate.github.com/blog/2013/01/13/sftp-access-to-amazon-ec2-using-filezilla</id>
+    <content type="html"><![CDATA[<p><a href="http://www.hermeswritings.com/index.php/2012/05/sftp-access-to-amazon-ec2-using-filezilla/" title="Permalink to SFTP Access To Amazon EC2 Using FileZilla « Hermes Writings">Permalink</a></p>
+
+<p>After You can setup EC2 Instance on AWS next step is to upload files onto the server.</p>
+
+<p>I have setup Ubunto instance and using Filezilla to connect to it after installation LAMP.</p>
+
+<ul>
+<li>Make sure port 22 is open in your instance’s Security Group in Amazon’s AWS site</li>
+<li>Add .Pem Keys to FileZilla Click on <code>Edit &gt;&gt; setting &gt;&gt; SFTP &gt;&gt; Add Key File</code></li>
+<li>Locate your PEM file. At this point FileZilla will ask if you want to convert it to a format it can use. Say <code>Yes</code> and tell it where to put the new .PPK file.</li>
+<li>Close the Settings window.</li>
+<li>Enter Host: like: <code>ec2-107-22-137-202.compute-1.amazonaws.com</code> or the <code>IP address</code>, user: <code>ubuntu</code> and port: <code>22</code>. Then click on Quick connect; It will connect with the following hints:</li>
+</ul>
+
+
+<p><img src="http://lygstate.github.com/images/2013/01/13/filezilla.jpg" alt="FileZilla Connection status" /></p>
+
+<p><code>User name</code> might vary depending on your instance, by default ububtu instance username is ubuntu</p>
+
+<p>Depending on the original AMI the instance is based on, you may want to double check that the correct user name is being used to authenticate.</p>
+
+<p>Amazon Linux: <code>ec2-user</code><br/>
+RHEL: <code>root</code><br/>
+Ubuntu: <code>ubuntu</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Setting up FTP Server on Ubuntu - Amazon EC2]]></title>
