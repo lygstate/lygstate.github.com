@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Install Windows with ISO image by the help of GRUB."
+title: "Windows Vista/2008/7全系列（x86、x64）ISO镜像文件硬盘安装方法"
 date: 2013-01-13 03:06
 comments: true
 categories: 
@@ -139,16 +139,3 @@ Contig.exe的意义是为了让win7p64.iso连续存储； grub4dos需要调用 `
 [ImDisk]:http://www.ltr-data.se/opencode.html/#ImDisk
 [grub4dos]:http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip
 [Contig]:http://technet.microsoft.com/en-us/Sysinternals/Bb897428.aspx
-
- [3]: http://bbs.wuyou.com/attachment.php?aid=69421&noupdate=yes
- [4]: http://bbs.wuyou.com/attachment.php?aid=69422&noupdate=yes
- [5]: http://bbs.wuyou.com/attachment.php?aid=69423&noupdate=yes
- [6]: http://bbs.wuyou.com/attachment.php?aid=69424&noupdate=yes
- [7]: http://bbs.wuyou.com/attachment.php?aid=69425&noupdate=yes
- [8]: http://bbs.wuyou.com/attachment.php?aid=69426&noupdate=yes
- [9]: http://bbs.wuyou.com/attachment.php?aid=69431&noupdate=yes
- [10]: http://bbs.wuyou.com/attachment.php?aid=69432&noupdate=yes
- [11]: http://bbs.wuyou.com/attachment.php?aid=69433&noupdate=yes
- [12]: http://bbs.wuyou.com/attachment.php?aid=69434&noupdate=yes
- [13]: http://bbs.wuyou.com/attachment.php?aid=69435&noupdate=yes
- [14]: http://bbs.wuyou.com/attachment.php?aid=69436&noupdate=yes
