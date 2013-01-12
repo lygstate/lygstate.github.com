@@ -7,32 +7,32 @@ categories:
 ---
 [Permalink](http://bbs.wuyou.com/viewthread.php?tid=148722 "Windows Vista/2008/7全系列（x86、x64）ISO镜像文件硬盘安装方法")
 
-本方法适合硬盘、移动硬盘、u盘、usb读卡器等可启动介质安装 Windows vista、Windows 2008、Windows 7 全系列（X86、AMD64）系统。本方法和DVD光驱安装没有太大的差别，只是启动和中间会用到grub4dos/ImDisk来虚拟光驱; 还有本文中选用ImDisk作虚拟光驱软件， 是因为自己在别的WinPE里接触过，在别的方面也常用，大家可以选择适合自己的来代替都是可以的， ImDisk是我在x86/x64（2008/win7）上都测试过的。下面以 `VMWare虚拟硬盘中+win7p64.iso` 为例  
+本方法适合`移动硬盘`、`硬盘`、`U盘`、`USB读卡器`等可启动介质安装 `Windows Vista`、 `Windows 2008`、 `Windows 7` 全系列（X86、AMD64）系统。本方法和DVD光驱安装没有太大的差别，只是启动和中间会用到grub4dos/ImDisk来虚拟光驱; 还有本文中选用ImDisk作虚拟光驱软件， 是因为自己在别的WinPE里接触过，在别的方面也常用，大家可以选择适合自己的来代替都是可以的， ImDisk是我在x86/x64（2008/win7）上都测试过的。下面以 `移动硬盘+win7p64.iso` 为例  
 
-##### 软件需求：  
-* `Windows ISO镜像` 在此为`win7p64.iso`。 (`Windows Vista、Windows 2008、Windows7 全系列（x86、x64）都可以`)，推荐放置在硬盘/移动硬盘上（速度快），此例中放在`VMWare虚拟硬盘中`， 以下以`硬盘`简称
-* [grubinst] 用于`硬盘`引导扇区的写入。
-* [grub4dos] 需要做成可启动的，可在硬盘、移动硬盘、u盘、usb读卡器、光盘、pxe服务器上。  
-如果ISO文件在usb设备上，grub4dos也应该装在同一个设备（大家可以试一试别的，能找到iso文件就行）  
+#### **`软件需求：`**
+* `Windows ISO镜像`， 此例中为`win7p64.iso`。 Windows Vista、 Windows 2008、 Windows7 全系列（x86、x64）都可以; 推荐放置在硬盘/移动硬盘上（速度快），此例中放在`移动硬盘`中：
+* [grubinst] 用于`移动硬盘`（或其其它安装盘）引导扇区的写入。
+* [grub4dos] 需要做成可启动的，可放在 `移动硬盘`、`硬盘`、U盘、USB读卡器、光盘、pxe服务器上。  
+如果ISO文件在USB设备上，grub4dos也应该装在同一个设备（大家可以试一试别的，能找到ISO文件就行）  
 * [ImDisk] 直接下载原版；默认带有x86、x64驱动，所以可以直接用于x86、x64版本安装。
 * [Contig] 使文件以连续的方式存储。
 
-##### **安装示例：**  
-为了方便抓图，这里在VMware里用第二块硬盘模仿移动硬盘操作  
-###### 制作U盘
-* 解压缩下载到的[grubinst]， 执行里面的grubinst_gui.exe，（以管理员模式运行），选择要写入的`磁盘`（这里是U盘）,点击`安装`。
-* 解压缩下载到的[grub4dos]， 复制里面的文件到U盘根目录下。`删除根目录下的menu.lst(让其自动进入命令模式)`
-* 解压缩下载到的[ImDisk]; 如果是可执行文件，照样可以解压缩。复制里面的文件到U盘根目录下
-* 复制win7p64.iso到U盘根目录
-* 解压缩下载到的[Contig]，复制Contig.exe到U盘根目录， 执行以下命令:
+#### **`安装示例：`**
+为了方便抓图，这里在VMware里用第二块硬盘模拟`移动硬盘`操作，假设该移动硬盘只有一个分区，并且识别成盘符X:  
+###### `制作移动硬盘:`
+* 解压缩下载到的[grubinst]， 执行里面的grubinst_gui.exe，（以管理员模式运行），选择要写入的`磁盘`（这里是`移动硬盘`）,点击`安装`。
+* 解压缩下载到的[grub4dos]， 复制里面的文件到`移动硬盘X:`根目录下。删除根目录下的`menu.lst`(让其自动进入命令模式)
+* 解压缩下载到的[ImDisk]; 如果是可执行文件，照样可以解压缩。复制里面的文件到`移动硬盘X:`根目录下
+* 复制win7p64.iso到`移动硬盘X:`根目录
+* 解压缩下载到的[Contig]，复制Contig.exe到`移动硬盘X:`根目录， 执行以下命令:
 
-		cd U盘根目录
+		pushd X: (`移动硬盘X:`根目录)
 		Contig.exe win7p64.iso
-Contig.exe的意义是为了让win7p64.iso连续存储； grub4dos需要调用 `map /win7p64.iso`，而文件win7p64.iso比较大，故这里不准备在grub4dos里把它整个map到内存；所以必须保证它在磁盘上是连续存放的，否则执行`map /win7p64.iso`会失败。
+Contig.exe的意义是为了让win7p64.iso连续存储； grub4dos需要调用 `map /win7p64.iso`，而文件win7p64.iso比较大，故这里不准备在grub4dos里把它整个map到内存；因此必须保证它在磁盘上是连续存放的。
 
-###### **U盘目录结构:**
+###### **`移动硬盘结构:`**
 	
-	U盘
+	X:
 	│  badgrub.exe
 	│  bootlace.com
 	│  ChangeLog_GRUB4DOS.txt
@@ -110,8 +110,8 @@ Contig.exe的意义是为了让win7p64.iso连续存储； grub4dos需要调用 `
 	    └─ia64
 	            imdisk.sys
 
-###### **安装操作系统:**
-1. 设置BIOS引导盘（当前为`硬盘`，也可以是U盘或是其他做好的安装盘); 电脑启动到grub4dos界面（图1）：  
+###### **`安装操作系统:`**
+1. 设置BIOS引导盘为`移动硬盘`（也可以是U盘或是其它安装盘); 启动电脑；进入到grub4dos界面；如下图所示（图1）：  
 ![Grub Init Interface](/images/2013/01/13/grub-init-interface.png)
 2. 在GRUB命令模式下执行以下命令：
 
@@ -126,7 +126,7 @@ Contig.exe的意义是为了让win7p64.iso连续存储； grub4dos需要调用 `
 ![No CD/DVD](/images/2013/01/13/grub-no-dvd-error.jpg)
 4. 上一步就因为找不到真实的光驱,所以报错,此时点击`Shift+F10`调出CMD窗口， 通过imdisk挂载`win7p64.iso`为虚拟光驱;执行以下一系列命令:
 
-		pushd D: (您那里可能是E: F:，即VMware虚拟硬盘所在的盘符,此为注释)
+		pushd X: (您那里可能是E: F:，即VMware虚拟硬盘所在的盘符,此为注释)
 		rundll32.exe setupapi.dll,InstallHinfSection DefaultInstall 132 .\imdisk.inf (安装驱动，稍等几秒,等待安装成功,很快的)  
 		imdisk -a -f "win7p64.iso" -m #:
 执行情况如下图所示:  
