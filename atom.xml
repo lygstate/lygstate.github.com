@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://lygstate.github.com/atom.xml" rel="self"/>
   <link href="http://lygstate.github.com/"/>
-  <updated>2013-01-13T06:03:50+08:00</updated>
+  <updated>2013-01-13T06:07:43+08:00</updated>
   <id>http://lygstate.github.com/</id>
   <author>
     <name><![CDATA[Yonggang Luo]]></name>
@@ -41,7 +41,7 @@
 <h6><code>制作移动硬盘:</code></h6>
 
 <ul>
-<li>解压缩下载到的<a href="http://download.gna.org/grubutil/grubinst-1.1-bin-w32-2008-01-01.zip">grubinst</a>， 执行里面的grubinst_gui.exe，（以管理员模式运行），选择要写入的<code>磁盘</code>（这里是<code>移动硬盘</code>）,点击<code>安装</code>。</li>
+<li>解压缩下载到的<a href="http://download.gna.org/grubutil/grubinst-1.1-bin-w32-2008-01-01.zip">grubinst</a>， 执行里面的<code>grubinst_gui.exe</code>（以管理员模式运行），选择要写入的<code>磁盘</code>（这里是<code>移动硬盘</code>）,点击<code>安装</code>。</li>
 <li>解压缩下载到的<a href="http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip">grub4dos</a>， 复制里面的文件到<code>移动硬盘X:</code>根目录下。删除根目录下的<code>menu.lst</code>(让其自动进入命令模式)</li>
 <li>解压缩下载到的<a href="http://www.ltr-data.se/opencode.html/#ImDisk">ImDisk</a>; 如果是可执行文件，照样可以解压缩。复制里面的文件到<code>移动硬盘X:</code>根目录下</li>
 <li>复制win7p64.iso到<code>移动硬盘X:</code>根目录</li>
