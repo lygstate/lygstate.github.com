@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My Octopress Blog</title>
+  <title>Show All Running Processes in Linux - My Octopress Blog</title>
   <meta name="author" content="Yonggang Luo">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lygstate.github.com/">
+  <link rel="canonical" href="http://lygstate.github.com/blog/2013/01/13/show-all-running-processes-in-linux/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -62,15 +62,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/01/13/show-all-running-processes-in-linux/">Show All Running Processes in Linux</a></h1>
+      <h1 class="entry-title">Show All Running Processes in Linux</h1>
     
     
       <p class="meta">
@@ -93,7 +90,7 @@
   </header>
 
 
-  <div class="entry-content"><p><a href="http://www.cyberciti.biz/faq/show-all-running-processes-in-linux/" title="Permalink to Show All Running Processes in Linux">Permalink</a></p>
+<div class="entry-content"><p><a href="http://www.cyberciti.biz/faq/show-all-running-processes-in-linux/" title="Permalink to Show All Running Processes in Linux">Permalink</a></p>
 
 <p>How do I see all running process in Linux?</p>
 
@@ -194,120 +191,16 @@ Fig.03: htop - Interactive Linux / UNIX process viewer</p>
 <p>The program atop is an interactive monitor to view the load on a Linux system. It shows the occupation of the most critical hardware resources (from a performance point of view) on system level, i.e. cpu, memory, disk and network. It also shows which processes are responsible for the indicated load with respect to cpu- and memory load on process level; disk- and network load is only shown per process if a kernel patch has been installed. Type the following command to start atop:<br/>
 <code># atop</code></p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/12/building-a-socks-proxy-on-ec2/">Building a SOCKS Proxy on EC2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Yonggang Luo</span></span>
 
-<time datetime="2013-01-12T21:15:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://eric.gerlach.ca/blog/2012/6/19/building-a-socks-proxy-on-ec2-to-get-around-wifi-port-blocki.html">Permalink</a></p>
-
-<p>At the NXNE Mobile Hackathon, we ran into a small problem. The wifi set up in the room would only allow connections over HTTP and HTTPS, which made it impossible to do many things you might want to do at a hackathon, like:</p>
-
-<ol>
-<li>Push to GitHub over SSH</li>
-<li>Connect to MongoDB instances</li>
-<li>Connect to&#8230; anything&#8230; that isn&#8217;t on ports 80 or 443&#8230; so a lot.</li>
-</ol>
-
-
-<p>If you can configure your tools correctly, the easiest way to get around this kind of problem is via a SOCKS proxy. Normally, I&#8217;d set up an SSH tunnel and run the SOCKS proxy over that&#8230; but no SSH. So the next best thing is to get a SOCKS server running on EC2. Let&#8217;s go through the steps required to set this up so that if you end up in the same situation, you can help those around you.</p>
-
-<p>Doing this assumes that you temporarily have an internet connection that is unrestricted, like a tethered smartphone or a wired connection. I&#8217;m also assuming that you know your way around EC2 a bit.</p>
-
-<ol>
-<li>Connect to your unrestricted internet connection</li>
-<li>Login to EC2</li>
-<li>Ensure that you have a keypair setup</li>
-<li>Create an EC2 Security Group that opens ports 22 and 443 to the world</li>
-<li>Fire up an Ubuntu 12.04 LTS instance (micro will usually do) with your keypair and Security Group</li>
-<li>SSH into the new machine with the SSH key (default username: ubuntu)</li>
-<li><p>Run the following commands at the prompt or in a shell script:
- sudo apt-get install build-essential
- wget http://www.inet.no/dante/files/dante-1.3.2.tar.gz # or another version
- tar -zxvf dante-1.3.2.tar.gz
- cd dante-1.3.2
- ./configure
- make
- sudo make install
- $ sudo make me a sandwich</p></li>
-<li><p>Put the following config in /etc/sock.conf
- ## general configuration (taken from FAQ)</p>
-
-<p> internal: eth0 port = 443
- external: eth0
- method: username none
- user.privileged: root
- user.unprivileged: nobody
- logoutput: stderr</p>
-
-<p> ## client access rules</p>
-
-<p> client pass { from: 0.0.0.0/0 to: 0.0.0.0/0 } # address-range on internal nic.</p>
-
-<p> ## server operation access rules</p>
-
-<p> # block connections to localhost, or they will appear to come from the proxy.
- block { from: 0.0.0.0/0 to: lo log: connect }</p>
-
-<p> # allow the rest
- pass { from: 0.0.0.0/0 to: 0.0.0.0/0 }</p></li>
-<li><p>Run <code>sudo sockd -D</code></p></li>
-</ol>
-
-
-<p>Now that we&#8217;ve got the server running, we have to configure our clients to connect to it. Fortunately, this is relatively easy. If you&#8217;re on linux, run your programs with tsocks. On Windows or Mac, you can try Proxifier (never tried it myself). Remember that the proxy is on port 443.</p>
-
-<p>If you&#8217;re using PuTTY, you can set your proxy under Connection &gt; Proxy.</p>
-
-<p>This set of steps creates an open proxy that anyone can use to proxy to anywhere. Don&#8217;t leave it running unless you want really big EC2 bills.</p>
-
-<p>In doing this, I realized that it would be even better to be able to do this via a VPN instead of a SOCKS proxy in order to get better Windows and Mac full capture support. I&#8217;m going to play with this idea and post again when I&#8217;ve got something.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/12/converting-between-different-ssh-private-slash-public-key-formats/">Converting Between Different SSH Private/public Key Formats.</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -319,51 +212,42 @@ Fig.03: htop - Interactive Linux / UNIX process viewer</p>
   
 
 
-<time datetime="2013-01-12T16:00:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2013</time>
-        
-      </p>
+<time datetime="2013-01-13T00:01:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux-process-list/'>linux,process,list</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><h2>PuTTY &#8211;> SSH</h2>
-
-<ul>
-<li>PuTTY private key to SSH public key and private key.<br/>
-<code>puttygen</code> supports exporting to an OpenSSH compatible format.
-
-<ol>
-<li>Open PuttyGen</li>
-<li>Click Load</li>
-<li>Load your private key</li>
-<li>Go to <code>Conversions-&gt;Export OpenSSH</code> and export your private key</li>
-<li>Copy your private key to <code>~/.ssh/id_dsa</code> (or <code>id_rsa</code>).</li>
-<li>Create the RFC 4716 version of the public key using <code>ssh-keygen</code>:<br />
-<code>ssh-keygen -e -f ~/.ssh/id_dsa &gt; ~/.ssh/id_dsa_com.pub</code></li>
-<li>Convert the RFC 4716 version of the public key to the OpenSSH format:<br />
-<code>ssh-keygen -i -f ~/.ssh/id_dsa_com.pub &gt; ~/.ssh/id_dsa.pub</code></li>
-</ol>
-</li>
-<li>PuTTY public key to SSH public key<br/>
-If all you have is a public key from a user in PuTTY-style format, you can convert it to standard openssh format like so:<br/>
-<code>ssh-keygen -i -f keyfile.pub &gt; newkeyfile.pub</code></li>
-</ul>
-
-
-<p>See <a href="http://linux-sxs.org/networking/openssh.putty.html">this</a> and <a href="http://www.wellsi.com/sme/ssh/ssh.html">this</a> for more information.</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lygstate.github.com/blog/2013/01/13/show-all-running-processes-in-linux/" data-via="" data-counturl="http://lygstate.github.com/blog/2013/01/13/show-all-running-processes-in-linux/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/12/building-a-socks-proxy-on-ec2/" title="Previous Post: Building a SOCKS proxy on EC2">&laquo; Building a SOCKS proxy on EC2</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -392,6 +276,7 @@ If all you have is a public key from a user in PuTTY-style format, you can conve
 
   
 </aside>
+
 
     </div>
   </div>
