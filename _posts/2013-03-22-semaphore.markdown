@@ -10,7 +10,7 @@ categories:
 
 In concurrent programming, a critical section is a piece of code that accesses a shared resource (data structure or device) that must not be concurrently accessed by more than one thread of execution. A critical section will usually terminate in fixed time, and a thread, task, or process will have to wait for a fixed time to enter it (aka bounded waiting). Some synchronization mechanism is required at the entry and exit of the critical section to ensure exclusive use, for example a semaphore. (From wiki)
 
-ÖĞÎÄÃû½Ğ×ö**ÁÙ½çÇø**.²»ÂÛÊÇÓ²¼şÁÙ½ç×ÊÔ´£¬»¹ÊÇÈí¼şÁÙ½ç×ÊÔ´£¬¶à¸öÏß³Ì±ØĞë»¥³âµØ¶ÔËü½øĞĞ·ÃÎÊ¡£ÓÉÓÚ²»ĞèÒª½øÈëÏµÍ³¼¶(Mutex¿ÉÒÔÓÃÓÚ¿ç½ø³ÌÍ¬²½£¬Òò´ËÊÇÄÚºË¶ÔÏó)£¬Ëü±È½ÏÇáÁ¿£¬Ğ§ÂÊ»á¸ßºÜ¶à£¨WindowsÏÂ£©¡£µ«ÊÇÓĞµÄ²Ù×÷ÏµÍ³**½ø³Ì**Óë**Ïß³Ì**ÊÇÍ¬Ò»¸ö¸ÅÄî£¬±ÈÈçÔÚVxWorksÖ»ÓĞ**Task**,ÔÚÕâÖÖ»·¾³ÏÂ£¬MutexÓëCritical SectionÊÇµÈ¼ÛµÄ¡£
+ä¸­æ–‡åå«åš**ä¸´ç•ŒåŒº**.ä¸è®ºæ˜¯ç¡¬ä»¶ä¸´ç•Œèµ„æºï¼Œè¿˜æ˜¯è½¯ä»¶ä¸´ç•Œèµ„æºï¼Œå¤šä¸ªçº¿ç¨‹å¿…é¡»äº’æ–¥åœ°å¯¹å®ƒè¿›è¡Œè®¿é—®ã€‚ç”±äºä¸éœ€è¦è¿›å…¥ç³»ç»Ÿçº§(Mutexå¯ä»¥ç”¨äºè·¨è¿›ç¨‹åŒæ­¥ï¼Œå› æ­¤æ˜¯å†…æ ¸å¯¹è±¡)ï¼Œå®ƒæ¯”è¾ƒè½»é‡ï¼Œæ•ˆç‡ä¼šé«˜å¾ˆå¤šï¼ˆWindowsä¸‹ï¼‰ã€‚ä½†æ˜¯æœ‰çš„æ“ä½œç³»ç»Ÿ**è¿›ç¨‹**ä¸**çº¿ç¨‹**æ˜¯åŒä¸€ä¸ªæ¦‚å¿µï¼Œæ¯”å¦‚åœ¨VxWorksåªæœ‰**Task**,åœ¨è¿™ç§ç¯å¢ƒä¸‹ï¼ŒMutexä¸Critical Sectionæ˜¯ç­‰ä»·çš„ã€‚
 
 #####Critical Section Usage
 **Example Code For Critical Sections with POSIX pthread library**
@@ -74,8 +74,8 @@ In concurrent programming, a critical section is a piece of code that accesses a
 	    return 0;
 	}
 
-##### Critical Section Óë Mutex µÄÇø±ğ
-Critical Section²»ÊÇÒ»¸öºËĞÄ¶ÔÏó£¬ÎŞ·¨»ñÖª½øÈëÁÙ½çÇøµÄÏß³ÌÊÇÉúÊÇËÀ£¬Èç¹û½øÈëÁÙ½çÇøµÄÏß³Ì¹ÒÁË£¬Ã»ÓĞÊÍ·ÅÁÙ½ç×ÊÔ´£¬ÏµÍ³ÎŞ·¨»ñÖª£¬¶øÇÒÃ»ÓĞ°ì·¨ÊÍ·Å¸ÃÁÙ½ç×ÊÔ´¡£¶ø Mutex ÊÇÓĞ³¬Ê±Ñ¡ÏîµÄ£¬Èç¹ûÒ»¸ö Mutex Õ¼ÓÃ×ÊÔ´Ì«¾Ã£¬ÄÇÃ´»áÖ±½Ó±»ÊÍ·Å¡£¶øÇÒ¿ÉÒÔÔÚÆäËü½ø³ÌÏú»Ù Mutex¶ÔÏó£¬µ«ÊÇ Critical Section¾Í²»¿ÉÒÔ
+##### Critical Section ä¸ Mutex çš„åŒºåˆ«
+Critical Sectionä¸æ˜¯ä¸€ä¸ªæ ¸å¿ƒå¯¹è±¡ï¼Œæ— æ³•è·çŸ¥è¿›å…¥ä¸´ç•ŒåŒºçš„çº¿ç¨‹æ˜¯ç”Ÿæ˜¯æ­»ï¼Œå¦‚æœè¿›å…¥ä¸´ç•ŒåŒºçš„çº¿ç¨‹æŒ‚äº†ï¼Œæ²¡æœ‰é‡Šæ”¾ä¸´ç•Œèµ„æºï¼Œç³»ç»Ÿæ— æ³•è·çŸ¥ï¼Œè€Œä¸”æ²¡æœ‰åŠæ³•é‡Šæ”¾è¯¥ä¸´ç•Œèµ„æºã€‚è€Œ Mutex æ˜¯æœ‰è¶…æ—¶é€‰é¡¹çš„ï¼Œå¦‚æœä¸€ä¸ª Mutex å ç”¨èµ„æºå¤ªä¹…ï¼Œé‚£ä¹ˆä¼šç›´æ¥è¢«é‡Šæ”¾ã€‚è€Œä¸”å¯ä»¥åœ¨å…¶å®ƒè¿›ç¨‹é”€æ¯ Mutexå¯¹è±¡ï¼Œä½†æ˜¯ Critical Sectionå°±ä¸å¯ä»¥
 
 ##### Critical Section properties
 Typically, critical sections prevent process and thread migration between processors and the preemption of processes and threads by interrupts and other processes and threads.
@@ -90,7 +90,7 @@ Since critical sections may execute only on the processor on which they are ente
 Performance enhancements include executing pending interrupts at the exit of all critical sections and allowing the scheduler to run at the exit of all critical sections. Furthermore, pending interrupts may be transferred to other processors for execution.
 
 
-##### Critical Section Ê¹ÓÃ×¢ÒâÊÂÏî
+##### Critical Section ä½¿ç”¨æ³¨æ„äº‹é¡¹
 Critical sections should not be used as a long-lived locking primitive. They should be short enough that the critical section will be entered, executed, and exited without any interrupts occurring, neither from hardware much less the scheduler.
 
 ##### Critical Section under Linux is *futex*
@@ -101,40 +101,40 @@ Unfortunately, futexes can be very tricky to implement (PDF).
 
 ####Mutex ("mutual exclusion" lock)
 
-MutexºÍcritical sectionÒ»Ñù£¬ÓÃÀ´±£Ö¤Í¬Ê±Ö»ÓĞÒ»¸öÏß³Ì½øÈëÄ³ÇøÓò£¬Í¨³£ÓÃÀ´ÊµÏÖ¶ÔÄ³µ¥Ò»×ÊÔ´µÄ·ÃÎÊ¿ØÖÆ¡£Mutex¿ÉÒÔÉè¶¨time out£¬¿ÉÒÔ²»Ïñcritical sectionÒ»ÑùËÀµÈ¡£Èç¹ûÒ»¸öÓµÓĞMutexµÄÏß³ÌÔÚ·µ»ØÖ®Ç°Ã»ÓĞµ÷ÓÃReleaseMutex()£¬ÄÇÃ´Õâ¸öMutex¾Í±»ÉáÆúÁË£¬µ«ÊÇµ±ÆäËûÏß³ÌµÈ´ı(WaitForSingleObjectµÈ)Õâ¸öMutexÊ±£¬ÈÔÄÜ·µ»Ø£¬²¢µÃµ½Ò»¸öWAIT_ABANDONED_0·µ»ØÖµ¡£
+Mutexå’Œcritical sectionä¸€æ ·ï¼Œç”¨æ¥ä¿è¯åŒæ—¶åªæœ‰ä¸€ä¸ªçº¿ç¨‹è¿›å…¥æŸåŒºåŸŸï¼Œé€šå¸¸ç”¨æ¥å®ç°å¯¹æŸå•ä¸€èµ„æºçš„è®¿é—®æ§åˆ¶ã€‚Mutexå¯ä»¥è®¾å®štime outï¼Œå¯ä»¥ä¸åƒcritical sectionä¸€æ ·æ­»ç­‰ã€‚å¦‚æœä¸€ä¸ªæ‹¥æœ‰Mutexçš„çº¿ç¨‹åœ¨è¿”å›ä¹‹å‰æ²¡æœ‰è°ƒç”¨ReleaseMutex()ï¼Œé‚£ä¹ˆè¿™ä¸ªMutexå°±è¢«èˆå¼ƒäº†ï¼Œä½†æ˜¯å½“å…¶ä»–çº¿ç¨‹ç­‰å¾…(WaitForSingleObjectç­‰)è¿™ä¸ªMutexæ—¶ï¼Œä»èƒ½è¿”å›ï¼Œå¹¶å¾—åˆ°ä¸€ä¸ªWAIT_ABANDONED_0è¿”å›å€¼ã€‚
 
 A mutex (which stands for "mutual exclusion" lock) is a locking or synchronization object that allows multiple threads to synchronize access to shared resources. It is often used to ensure that shared variables are always seen by other threads in a consistent state.
 
 In Windows, the mutexes are both named and un-named. The named mutex is shared between the threads of different process.
 
-ÔÚMS WindowsÉÏAPIÊÇCreateMutex(), OpenMutex(), ReleaseMutex(), WaitForSingleObject()ºÍWaitForMultipleObjects()¡£ÓÃMFC¿âµÄCMutexÀà¿ÉÒÔÍê³ÉÍ¬Ñù¹¦ÄÜ¡£
+åœ¨MS Windowsä¸ŠAPIæ˜¯CreateMutex(), OpenMutex(), ReleaseMutex(), WaitForSingleObject()å’ŒWaitForMultipleObjects()ã€‚ç”¨MFCåº“çš„CMutexç±»å¯ä»¥å®ŒæˆåŒæ ·åŠŸèƒ½ã€‚
 
-In Linux, the mutexes are shared only between the threads of the same process. To achieve the same functionality in Linux, a System V semaphore can be used (¾ßÌå²Î¿¼ÕâÆªÎÄÕÂ).
+In Linux, the mutexes are shared only between the threads of the same process. To achieve the same functionality in Linux, a System V semaphore can be used (å…·ä½“å‚è€ƒè¿™ç¯‡æ–‡ç« ).
 
-Ö§³ÖPOSIX¿âµÄÏµÍ³(Linux/Unix)ÉÏÓĞpthread_mutex_lock()ºÍpthread_mutex_unlock()¡£
+æ”¯æŒPOSIXåº“çš„ç³»ç»Ÿ(Linux/Unix)ä¸Šæœ‰pthread_mutex_lock()å’Œpthread_mutex_unlock()ã€‚
 
-¼òµ¥ËµCriticalSection is a user-mode component implemented by the Win32 subsystem, while Mutex is a kernel-mode component. 
+ç®€å•è¯´CriticalSection is a user-mode component implemented by the Win32 subsystem, while Mutex is a kernel-mode component. 
 Practially, CriticalSection is much faster when there's no actual blocking (due to reduction in user-kernel mode switches), and probably slower when there is blocking (due to more complex implementation). Additionally, since a Mutex is represented by a HANDLE, you can wait on a mutex with a timeout, or with several other handles. Neither option is available with a Critical Section. Mutexes can be named and shared between processes, while CriticalSections are restricted to the threads of a single process.
 
  
 
 ####Semaphore
 
-ÌØµãÊÇÓĞ¼ÆÊı£¬Í¬Ê±¿ÉÒÔÓĞN¸öÏß³Ì¿ÉÒÔ½øÈëÒ»¸öÇøÓò¡£WindowsÉÏµÄAPIÓĞCreateSemaphore(), OpenSemaphore(), ReleaseSemaphore(), WaitForSingleObject()ºÍWaitForMultipleObjects()¡£»òÕßÓÃMFCµÄCSemaphoreÀà¡£
+ç‰¹ç‚¹æ˜¯æœ‰è®¡æ•°ï¼ŒåŒæ—¶å¯ä»¥æœ‰Nä¸ªçº¿ç¨‹å¯ä»¥è¿›å…¥ä¸€ä¸ªåŒºåŸŸã€‚Windowsä¸Šçš„APIæœ‰CreateSemaphore(), OpenSemaphore(), ReleaseSemaphore(), WaitForSingleObject()å’ŒWaitForMultipleObjects()ã€‚æˆ–è€…ç”¨MFCçš„CSemaphoreç±»ã€‚
 
-VxWorksÃ»ÓĞMutex, ËüÌá¹©ÈıÖÖSemaphore: binary, counting, mutex. Ïà¹ØAPIÊÇsemBCreate, semMCreate, semCCreate, semDelete, semTake, semGive, semFlush
+VxWorksæ²¡æœ‰Mutex, å®ƒæä¾›ä¸‰ç§Semaphore: binary, counting, mutex. ç›¸å…³APIæ˜¯semBCreate, semMCreate, semCCreate, semDelete, semTake, semGive, semFlush
 
-ÔÚVxWorkÉÏ£¬Mutex»á´¥·¢prority inheritance. If a higher priority task is waiting for a semaphore 
+åœ¨VxWorkä¸Šï¼ŒMutexä¼šè§¦å‘prority inheritance. If a higher priority task is waiting for a semaphore 
 taken a low priority task and the low priority task, its priority will be temporarily changed to the high priority task which is waiting.
 
 ####Binary semaphore
 
-ÔÚÓĞµÄÏµÍ³ÖĞBinary semaphoreÓëMutexÊÇÃ»ÓĞ²îÒìµÄ¡£ÔÚÓĞµÄÏµÍ³ÉÏ£¬Ö÷ÒªµÄ²îÒìÊÇmutexÒ»¶¨ÒªÓÉ»ñµÃËøµÄ½ø³ÌÀ´ÊÍ·Å¡£¶øsemaphore¿ÉÒÔÓÉÆäËü½ø³ÌÊÍ·Å£¨ÕâÊ±µÄsemaphoreÊµ¼Ê¾ÍÊÇ¸öÔ­×ÓµÄ±äÁ¿£¬´ó¼Ò¿ÉÒÔ¼Ó»ò¼õ£©£¬Òò´Ësemaphore¿ÉÒÔÓÃÓÚ½ø³Ì¼äÍ¬²½¡£SemaphoreµÄÍ¬²½¹¦ÄÜÊÇËùÓĞÏµÍ³¶¼Ö§³ÖµÄ£¬¶øMutexÄÜ·ñÓÉÆäËû½ø³ÌÊÍ·ÅÔòÎ´¶¨£¬Òò´Ë½¨ÒémutexÖ»ÓÃÓÚ±£»¤critical section¡£¶øsemaphoreÔòÓÃÓÚ±£»¤Ä³±äÁ¿£¬»òÕßÍ¬²½¡£
+åœ¨æœ‰çš„ç³»ç»Ÿä¸­Binary semaphoreä¸Mutexæ˜¯æ²¡æœ‰å·®å¼‚çš„ã€‚åœ¨æœ‰çš„ç³»ç»Ÿä¸Šï¼Œä¸»è¦çš„å·®å¼‚æ˜¯mutexä¸€å®šè¦ç”±è·å¾—é”çš„è¿›ç¨‹æ¥é‡Šæ”¾ã€‚è€Œsemaphoreå¯ä»¥ç”±å…¶å®ƒè¿›ç¨‹é‡Šæ”¾ï¼ˆè¿™æ—¶çš„semaphoreå®é™…å°±æ˜¯ä¸ªåŸå­çš„å˜é‡ï¼Œå¤§å®¶å¯ä»¥åŠ æˆ–å‡ï¼‰ï¼Œå› æ­¤semaphoreå¯ä»¥ç”¨äºè¿›ç¨‹é—´åŒæ­¥ã€‚Semaphoreçš„åŒæ­¥åŠŸèƒ½æ˜¯æ‰€æœ‰ç³»ç»Ÿéƒ½æ”¯æŒçš„ï¼Œè€ŒMutexèƒ½å¦ç”±å…¶ä»–è¿›ç¨‹é‡Šæ”¾åˆ™æœªå®šï¼Œå› æ­¤å»ºè®®mutexåªç”¨äºä¿æŠ¤critical sectionã€‚è€Œsemaphoreåˆ™ç”¨äºä¿æŠ¤æŸå˜é‡ï¼Œæˆ–è€…åŒæ­¥ã€‚
 
 ####Event
 
-Event¿ÉÒÔÓÃÀ´ÊµÏÖobserverÄ£Ê½¡£´´½¨Ò»¸öEvent£¬È»ºóÓÃWaitForSingleObject()¹ÒÆğµÈ´ıÆäËüÏß³ÌµãÁÁ(set)Õâ¸öEvent¡£ÎÒ¾­³£ÓÃµÄÒ»¸ö¼¿Á©ÊÇÔÚÓÃ»§Ì¬´´½¨Ò»¸öEventµÄ¾ä±ú£¬È»ºóÍ¨¹ıDeviceIoControl()°ÑËü´«µ½Çı¶¯ÀïÃæÈ¥£¬µ±Çı¶¯ÊÕµ½Íâ²¿×ÜÏß´«À´µÄÊı¾İ°ü¾ÍµãÁÁÕâ¸öEvent¡£WindowsµÄAPIÊÇCreateEvent(), OpenEvent(), SetEvent(), WaitForSingleObject(), WaitForMultipleObjects()¡£MFC¿âÀïÓĞCEventÀà¡£
+Eventå¯ä»¥ç”¨æ¥å®ç°observeræ¨¡å¼ã€‚åˆ›å»ºä¸€ä¸ªEventï¼Œç„¶åç”¨WaitForSingleObject()æŒ‚èµ·ç­‰å¾…å…¶å®ƒçº¿ç¨‹ç‚¹äº®(set)è¿™ä¸ªEventã€‚æˆ‘ç»å¸¸ç”¨çš„ä¸€ä¸ªä¼ä¿©æ˜¯åœ¨ç”¨æˆ·æ€åˆ›å»ºä¸€ä¸ªEventçš„å¥æŸ„ï¼Œç„¶åé€šè¿‡DeviceIoControl()æŠŠå®ƒä¼ åˆ°é©±åŠ¨é‡Œé¢å»ï¼Œå½“é©±åŠ¨æ”¶åˆ°å¤–éƒ¨æ€»çº¿ä¼ æ¥çš„æ•°æ®åŒ…å°±ç‚¹äº®è¿™ä¸ªEventã€‚Windowsçš„APIæ˜¯CreateEvent(), OpenEvent(), SetEvent(), WaitForSingleObject(), WaitForMultipleObjects()ã€‚MFCåº“é‡Œæœ‰CEventç±»ã€‚
 
 ####Spin lock
 
-spin lockÊÇÒ»¸öÄÚºËÌ¬¸ÅÄî¡£spin lockÓësemaphoreµÄÖ÷ÒªÇø±ğÊÇspin lockÊÇbusy waiting£¬¶øsemaphoreÊÇsleep¡£¶ÔÓÚ¿ÉÒÔsleepµÄ½ø³ÌÀ´Ëµ£¬busy waitingµ±È»Ã»ÓĞÒâÒå¡£¶ÔÓÚµ¥CPUµÄÏµÍ³£¬busy waitingµ±È»¸üÃ»ÒâÒå£¨Ã»ÓĞCPU¿ÉÒÔÊÍ·ÅËø£©¡£Òò´Ë£¬Ö»ÓĞ¶àCPUµÄÄÚºËÌ¬·Ç½ø³Ì¿Õ¼ä£¬²Å»áÓÃµ½spin lock¡£Linux kernelµÄspin lockÔÚ·ÇSMPµÄÇé¿öÏÂ£¬Ö»ÊÇ¹Øirq£¬Ã»ÓĞ±ğµÄ²Ù×÷£¬ÓÃÓÚÈ·±£¸Ã¶Î³ÌĞòµÄÔËĞĞ²»»á±»´ò¶Ï¡£ÆäÊµÒ²¾ÍÊÇÀàËÆmutexµÄ×÷ÓÃ£¬´®ĞĞ»¯¶Ô critical sectionµÄ·ÃÎÊ¡£µ«ÊÇmutex²»ÄÜ±£»¤ÖĞ¶ÏµÄ´ò¶Ï£¬Ò²²»ÄÜÔÚÖĞ¶Ï´¦Àí³ÌĞòÖĞ±»µ÷ÓÃ¡£¶øspin lockÒ²Ò»°ãÃ»ÓĞ±ØÒªÓÃÓÚ¿ÉÒÔsleepµÄ½ø³Ì¿Õ¼ä¡£
+spin lockæ˜¯ä¸€ä¸ªå†…æ ¸æ€æ¦‚å¿µã€‚spin lockä¸semaphoreçš„ä¸»è¦åŒºåˆ«æ˜¯spin lockæ˜¯busy waitingï¼Œè€Œsemaphoreæ˜¯sleepã€‚å¯¹äºå¯ä»¥sleepçš„è¿›ç¨‹æ¥è¯´ï¼Œbusy waitingå½“ç„¶æ²¡æœ‰æ„ä¹‰ã€‚å¯¹äºå•CPUçš„ç³»ç»Ÿï¼Œbusy waitingå½“ç„¶æ›´æ²¡æ„ä¹‰ï¼ˆæ²¡æœ‰CPUå¯ä»¥é‡Šæ”¾é”ï¼‰ã€‚å› æ­¤ï¼Œåªæœ‰å¤šCPUçš„å†…æ ¸æ€éè¿›ç¨‹ç©ºé—´ï¼Œæ‰ä¼šç”¨åˆ°spin lockã€‚Linux kernelçš„spin lockåœ¨éSMPçš„æƒ…å†µä¸‹ï¼Œåªæ˜¯å…³irqï¼Œæ²¡æœ‰åˆ«çš„æ“ä½œï¼Œç”¨äºç¡®ä¿è¯¥æ®µç¨‹åºçš„è¿è¡Œä¸ä¼šè¢«æ‰“æ–­ã€‚å…¶å®ä¹Ÿå°±æ˜¯ç±»ä¼¼mutexçš„ä½œç”¨ï¼Œä¸²è¡ŒåŒ–å¯¹ critical sectionçš„è®¿é—®ã€‚ä½†æ˜¯mutexä¸èƒ½ä¿æŠ¤ä¸­æ–­çš„æ‰“æ–­ï¼Œä¹Ÿä¸èƒ½åœ¨ä¸­æ–­å¤„ç†ç¨‹åºä¸­è¢«è°ƒç”¨ã€‚è€Œspin lockä¹Ÿä¸€èˆ¬æ²¡æœ‰å¿…è¦ç”¨äºå¯ä»¥sleepçš„è¿›ç¨‹ç©ºé—´ã€‚
