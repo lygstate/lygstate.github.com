@@ -35,30 +35,56 @@ Doing this assumes that you temporarily have an internet connection that is unre
 		sudo make install
 		$ sudo make me a sandwich
 			
-8. Put the following config in /etc/sock.conf
+8. Put the following config in /etc/sock.conf  
+	**Notice:**  
+	When use `internal: 127.0.0.1 port = 7071`, then the proxy address *is* `127.0.0.1:7071`.  
+	When use `internal: eth0 port = 7071`, and the IP binded to `eth0` is `10.210.235.113`,
+	then the proxy address **is** `10.210.235.113:7071`, it's the only proxy address.
 
-		## general configuration (taken from FAQ)
-		
-		internal: eth0 port = 443
+		logoutput: /var/log/danted.log
+		# But, when use eth0 instead, the the proxy addresss will turn out to be
+		# the IP that binded to eth0, support the IP binded to eth0 is ``
+		internal: 127.0.0.1 port = 7071
+		#internal: eth0 port = 7071
 		external: eth0
 		method: username none
-		user.privileged: root
-		user.unprivileged: nobody
-		logoutput: stderr
 		
-		## client access rules
+		#user.privileged: root
+		user.notprivileged: nobody
 		
-		client pass { from: 0.0.0.0/0 to: 0.0.0.0/0 } # address-range on internal nic.
+		client pass {
+		  from: 127.0.0.1/32 port 1-65535 to: 0.0.0.0/0
+		}
 		
+		client pass {
+		  from: 127.0.0.0/8 port 1-65535 to: 0.0.0.0/0
+		}
 		
-		## server operation access rules
+		client block {
+		  from: 0.0.0.0/0 to: 0.0.0.0/0
+		  log: connect error
+		}
 		
-		# block connections to localhost, or they will appear to come from the proxy.
-		block { from: 0.0.0.0/0 to: lo log: connect }
+		block {
+		  from: 0.0.0.0/0 to: 127.0.0.0/8
+		  log: connect error
+		}
 		
-		# allow the rest
-		pass { from: 0.0.0.0/0 to: 0.0.0.0/0 }
-	
+		pass {
+		  from: 127.0.0.1/32 to: 0.0.0.0/0
+		  protocol: tcp udp
+		}
+		
+		pass {
+		  from: 127.0.0.0/8 to: 0.0.0.0/0
+		  protocol: tcp udp
+		}
+		
+		block {
+		  from: 0.0.0.0/0 to: 0.0.0.0/0
+		  log: connect error
+		}
+
 9.  Run `sudo sockd -D`
 
 Now that we've got the server running, we have to configure our clients to connect to it. Fortunately, this is relatively easy. If you're on linux, run your programs with tsocks. On Windows or Mac, you can try Proxifier (never tried it myself). Remember that the proxy is on port 443.
