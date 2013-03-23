@@ -7,8 +7,10 @@ categories:
 ---
 
 ### "XY Problem" explanations by various people:
+[Every now and then I hear people say I might have an "XY problem". What is that?](http://www.perlmonks.org/index.pl?node_id=542341)
+
 - You want to do X, and you think Y is the best way of doing so. Instead of asking about X, you ask about Y. <br>
-— from ["Re: sequencial file naming"](http://www.perlmonks.org/index.pl?node_id=87035)
+— from ["Re: sequencial file naming"](http://www.perlmonks.org/index.pl?node_id=87035) by Abigail
 
 - You're trying to do X, and you thought of solution Y. So you're asking about solution Y, without even mentioning X. The problem is, there might be a better solution, but we can't know that unless you describe what X is. <br>
 — from [Re: How do I keep the command line from eating the backslashes?](http://www.perlmonks.org/index.pl?node_id=430320) by revdiablo
