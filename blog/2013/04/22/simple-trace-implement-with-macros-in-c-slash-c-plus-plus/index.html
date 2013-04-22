@@ -233,60 +233,76 @@ DEBUG("i = %d" _ i);
 
 <h2>C/C++ TRACE</h2>
 
-<hr />
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>#define ENABLE(x) ENABLE_##x
+</span><span class='line'>#define TRACE_LEVEL(level) level##_TRACE_LEVEL
+</span><span class='line'>
+</span><span class='line'>#define TRACE_LEVEL_FATAL 0
+</span><span class='line'>#define TRACE_LEVEL_ERROR 1
+</span><span class='line'>#define TRACE_LEVEL_WARNING 2
+</span><span class='line'>#define TRACE_LEVEL_INFO 3
+</span><span class='line'>#define TRACE_LEVEL_DEBUG 4
+</span><span class='line'>
+</span><span class='line'>#define TRACE_IMPL(error_level, module, format, ...) \
+</span><span class='line'>    if (ENABLE(module) && error_level &lt;= TRACE_LEVEL(module)) {\
+</span><span class='line'>        printf("[%s:%d %s %s %d]\r\n", #module, error_level, __FILE__, __FUNCTION__, __LINE__); \
+</span><span class='line'>        printf(format, __VA_ARGS__);\
+</span><span class='line'>    } \
+</span><span class='line'>
+</span><span class='line'>#define TRACE_FATAL(module, format, ...) TRACE_IMPL(TRACE_LEVEL_FATAL, module, format, __VA_ARGS__)
+</span><span class='line'>#define TRACE_ERROR(module, format, ...) TRACE_IMPL(TRACE_LEVEL_ERROR, module, format, __VA_ARGS__)
+</span><span class='line'>#define TRACE_WARNING(module, format, ...) TRACE_IMPL(TRACE_LEVEL_WARNING, module, format, __VA_ARGS__)
+</span><span class='line'>#define TRACE_INFO(module, format, ...) TRACE_IMPL(TRACE_LEVEL_INFO, module, format, __VA_ARGS__)
+</span><span class='line'>#define TRACE_DEBUG(module, format, ...) TRACE_IMPL(TRACE_LEVEL_DEBUG, module, format, __VA_ARGS__)
+</span><span class='line'>
+</span><span class='line'>void testTrace()
+</span><span class='line'>{
+</span><span class='line'>#define ENABLE_ACAS 1
+</span><span class='line'>
+</span><span class='line'>#define ACAS_TRACE_LEVEL TRACE_LEVEL_FATAL
+</span><span class='line'>    TRACE_ERROR(ACAS, "Error\r\n");
+</span><span class='line'>    TRACE_FATAL(ACAS, "Fatal\r\n");
+</span><span class='line'>
+</span><span class='line'>#define ACAS_TRACE_LEVEL TRACE_LEVEL_INFO
+</span><span class='line'>    TRACE_INFO(ACAS, "Info\r\n");
+</span><span class='line'>    TRACE_DEBUG(ACAS, "Debug\r\n");
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
 
-<h1>define ENABLE(x) ENABLE_##x</h1>
-
-<h1>define TRACE_LEVEL(level) level##_TRACE_LEVEL</h1>
-
-<h1>define TRACE_LEVEL_FATAL 0</h1>
-
-<h1>define TRACE_LEVEL_ERROR 1</h1>
-
-<h1>define TRACE_LEVEL_WARNING 2</h1>
-
-<h1>define TRACE_LEVEL_INFO 3</h1>
-
-<h1>define TRACE_LEVEL_DEBUG 4</h1>
-
-<h1>define TRACE_IMPL(error_level, module, format, &#8230;) \</h1>
-
-<pre><code>if (ENABLE(module) &amp;&amp; error_level &lt;= TRACE_LEVEL(module)) {\
-    printf("[%s:%d %s %s %d]\r\n", #module, error_level, __FILE__, __FUNCTION__, __LINE__); \
-    printf(format, __VA_ARGS__);\
-} \
-</code></pre>
-
-<h1>define TRACE_FATAL(module, format, &#8230;) TRACE_IMPL(TRACE_LEVEL_FATAL, module, format, <strong>VA_ARGS</strong>)</h1>
-
-<h1>define TRACE_ERROR(module, format, &#8230;) TRACE_IMPL(TRACE_LEVEL_ERROR, module, format, <strong>VA_ARGS</strong>)</h1>
-
-<h1>define TRACE_WARNING(module, format, &#8230;) TRACE_IMPL(TRACE_LEVEL_WARNING, module, format, <strong>VA_ARGS</strong>)</h1>
-
-<h1>define TRACE_INFO(module, format, &#8230;) TRACE_IMPL(TRACE_LEVEL_INFO, module, format, <strong>VA_ARGS</strong>)</h1>
-
-<h1>define TRACE_DEBUG(module, format, &#8230;) TRACE_IMPL(TRACE_LEVEL_DEBUG, module, format, <strong>VA_ARGS</strong>)</h1>
-
-<p>void testTrace()
-{</p>
-
-<h1>define ENABLE_ACAS 1</h1>
-
-<h1>define ACAS_TRACE_LEVEL TRACE_LEVEL_FATAL</h1>
-
-<pre><code>TRACE_ERROR(ACAS, "Error\r\n");
-TRACE_FATAL(ACAS, "Fatal\r\n");
-</code></pre>
-
-<h1>define ACAS_TRACE_LEVEL TRACE_LEVEL_INFO</h1>
-
-<pre><code>TRACE_INFO(ACAS, "Info\r\n");
-TRACE_DEBUG(ACAS, "Debug\r\n");
-</code></pre>
-
-<p>}</p>
-
-<hr />
 </div>
 
 
@@ -330,7 +346,7 @@ TRACE_DEBUG(ACAS, "Debug\r\n");
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/03/22/semaphore/" title="Previous Post: Semaphore, Mutex, Critical section, SpinLock, Event">&laquo; Semaphore, Mutex, Critical section, SpinLock, Event</a>
+        <a class="basic-alignment left" href="/blog/2013/03/24/xy-problem/" title="Previous Post: XY Problem">&laquo; XY Problem</a>
       
       
     </p>
@@ -350,6 +366,10 @@ TRACE_DEBUG(ACAS, "Debug\r\n");
       </li>
     
       <li class="post">
+        <a href="/blog/2013/03/24/xy-problem/">XY Problem</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/03/22/semaphore/">Semaphore, Mutex, Critical section, SpinLock, Event</a>
       </li>
     
@@ -359,10 +379,6 @@ TRACE_DEBUG(ACAS, "Debug\r\n");
     
       <li class="post">
         <a href="/blog/2013/01/13/sftp-access-to-amazon-ec2-using-filezilla/">SFTP Access To Amazon EC2 Using FileZilla</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/13/setting-up-ftp-server-on-ubuntu-amazon-ec2/">Setting up FTP Server on Ubuntu - Amazon EC2</a>
       </li>
     
   </ul>

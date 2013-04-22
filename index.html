@@ -236,60 +236,205 @@ DEBUG("i = %d" _ i);
 
 <h2>C/C++ TRACE</h2>
 
-<hr />
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>#define ENABLE(x) ENABLE_##x
+</span><span class='line'>#define TRACE_LEVEL(level) level##_TRACE_LEVEL
+</span><span class='line'>
+</span><span class='line'>#define TRACE_LEVEL_FATAL 0
+</span><span class='line'>#define TRACE_LEVEL_ERROR 1
+</span><span class='line'>#define TRACE_LEVEL_WARNING 2
+</span><span class='line'>#define TRACE_LEVEL_INFO 3
+</span><span class='line'>#define TRACE_LEVEL_DEBUG 4
+</span><span class='line'>
+</span><span class='line'>#define TRACE_IMPL(error_level, module, format, ...) \
+</span><span class='line'>    if (ENABLE(module) && error_level &lt;= TRACE_LEVEL(module)) {\
+</span><span class='line'>        printf("[%s:%d %s %s %d]\r\n", #module, error_level, __FILE__, __FUNCTION__, __LINE__); \
+</span><span class='line'>        printf(format, __VA_ARGS__);\
+</span><span class='line'>    } \
+</span><span class='line'>
+</span><span class='line'>#define TRACE_FATAL(module, format, ...) TRACE_IMPL(TRACE_LEVEL_FATAL, module, format, __VA_ARGS__)
+</span><span class='line'>#define TRACE_ERROR(module, format, ...) TRACE_IMPL(TRACE_LEVEL_ERROR, module, format, __VA_ARGS__)
+</span><span class='line'>#define TRACE_WARNING(module, format, ...) TRACE_IMPL(TRACE_LEVEL_WARNING, module, format, __VA_ARGS__)
+</span><span class='line'>#define TRACE_INFO(module, format, ...) TRACE_IMPL(TRACE_LEVEL_INFO, module, format, __VA_ARGS__)
+</span><span class='line'>#define TRACE_DEBUG(module, format, ...) TRACE_IMPL(TRACE_LEVEL_DEBUG, module, format, __VA_ARGS__)
+</span><span class='line'>
+</span><span class='line'>void testTrace()
+</span><span class='line'>{
+</span><span class='line'>#define ENABLE_ACAS 1
+</span><span class='line'>
+</span><span class='line'>#define ACAS_TRACE_LEVEL TRACE_LEVEL_FATAL
+</span><span class='line'>    TRACE_ERROR(ACAS, "Error\r\n");
+</span><span class='line'>    TRACE_FATAL(ACAS, "Fatal\r\n");
+</span><span class='line'>
+</span><span class='line'>#define ACAS_TRACE_LEVEL TRACE_LEVEL_INFO
+</span><span class='line'>    TRACE_INFO(ACAS, "Info\r\n");
+</span><span class='line'>    TRACE_DEBUG(ACAS, "Debug\r\n");
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
 
-<h1>define ENABLE(x) ENABLE_##x</h1>
+</div>
+  
+  
 
-<h1>define TRACE_LEVEL(level) level##_TRACE_LEVEL</h1>
 
-<h1>define TRACE_LEVEL_FATAL 0</h1>
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/24/xy-problem/">XY Problem</a></h1>
+    
+    
+      <p class="meta">
+        
 
-<h1>define TRACE_LEVEL_ERROR 1</h1>
 
-<h1>define TRACE_LEVEL_WARNING 2</h1>
 
-<h1>define TRACE_LEVEL_INFO 3</h1>
 
-<h1>define TRACE_LEVEL_DEBUG 4</h1>
 
-<h1>define TRACE_IMPL(error_level, module, format, &#8230;) \</h1>
 
-<pre><code>if (ENABLE(module) &amp;&amp; error_level &lt;= TRACE_LEVEL(module)) {\
-    printf("[%s:%d %s %s %d]\r\n", #module, error_level, __FILE__, __FUNCTION__, __LINE__); \
-    printf(format, __VA_ARGS__);\
-} \
+
+
+  
+
+
+<time datetime="2013-03-24T01:52:00+08:00" pubdate data-updated="true">Mar 24<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>&#8220;XY Problem&#8221; explanations by various people:</h3>
+
+<p><a href="http://www.perlmonks.org/index.pl?node_id=542341">Every now and then I hear people say I might have an &#8220;XY problem&#8221;. What is that?</a></p>
+
+<ul>
+<li><p>You want to do X, and you think Y is the best way of doing so. Instead of asking about X, you ask about Y. <br>
+— from <a href="http://www.perlmonks.org/index.pl?node_id=87035">&#8220;Re: sequencial file naming&#8221;</a> by Abigail</p></li>
+<li><p>You&#8217;re trying to do X, and you thought of solution Y. So you&#8217;re asking about solution Y, without even mentioning X. The problem is, there might be a better solution, but we can&#8217;t know that unless you describe what X is. <br>
+— from <a href="http://www.perlmonks.org/index.pl?node_id=430320">Re: How do I keep the command line from eating the backslashes?</a> by revdiablo</p></li>
+<li><p>Someone asks how to do Y when they really want to do X. They ask how to do Y because they believe it is the best way to accomplish X. People trying to help go through many iterations of &#8220;try this&#8221;, followed by &#8220;that won&#8217;t work because of&#8221;. That is, depending on the circumstances, other solutions may be the way to go. <br>
+— from <a href="http://www.perlmonks.org/index.pl?node_id=327963">Re: Re: Re: Re: regex to validate e-mail addresses and phone numbers</a> by Limbic~Region</p></li>
+<li><p>To answer question Y, without understanding larger problem (the context) X, will most likely <em>not</em> help them entirely with X. <br>
+— from <a href="https://groups.google.com/forum/?fromgroups=#!msg/comp.lang.perl.misc/rCCGCpipjH0/TBQOCAT9154J">The XY problem (was Re: CGI.pm: controlling Back &amp; Reload)
+</a> by <a href="http://www.stonehenge.com/merlyn/">Randal L. Schwartz</a></p></li>
+<li><p>A.k.a. &#8220;premature closure&#8221;: the questioner wanted to solve some not very clearly stated X, they concluded that Y was a component of a solution, and now they&#8217;re asking how to implement Y. <br>
+— from <a href="https://groups.google.com/forum/?fromgroups=#!msg/comp.lang.perl.misc/rCCGCpipjH0/awehJE2Ck5YJ">Re: CGI.pm: controlling Back &amp; Reload</a> by Alan J. Flavell</p></li>
+<li><p>The XY problem is when you need to do X, and you think you can use Y to do X, so you ask about how to do Y, when what you really should do is state what your X problem is. There may be a Z solution that is even better than Y, but nobody can suggest it if X is never mentioned. <br>
+— from <a href="https://groups.google.com/forum/?fromgroups=#!msg/comp.lang.perl.misc/KGEh9CXPwQ0/TLmvdqBDV_AJ">Re: Compound scalar names?</a> by Tad McClellan</p></li>
+<li><p>When people come [in here] asking how to do something stupid, I&#8217;m never quite sure what to do. I can just answer the question as asked, figuring that it&#8217;s not my problem to tell people that they&#8217;re being stupid&#8230; . But if I do that, people might jump on me for being a smart aleck, which has happened at times. (&#8220;Come on, help the poor guy out; if you know what he really need why don&#8217;t you just give it to him?&#8221;) <br>
+&#8230; <br>
+On the other hand, I could try to answer on a different level, present a better solution, and maybe slap a little education on &#8216;em. That&#8217;s nice when it works, but if it doesn&#8217;t it&#8217;s really sad to see your hard work and good advice ignored. Also, people tend to jump on you for not answering the question. (&#8220;Who are you to be telling this guy what he should be doing? Just answer the question.&#8221;)  <br>
+&#8230; <br>
+I guess there&#8217;s room for both kinds of answer. Or maybe there isn&#8217;t room for either kind. <br>
+— from <a href="https://groups.google.com/forum/?fromgroups=#!msg/comp.programming/ygCTx6AN7ds/3S9Ei9saEbUJ">Why it&#8217;s stupid to <em>use a variable as a variable name</em></a> by Mark-Jason Dominus</p></li>
+<li><p>The questions I like the best are the ones that go like this:</p>
+
+<pre><code>  I want to accomplish X.
+
+  I thought that the following code fragment would do it:
+
+  ...
+
+  But instead it does Y.
+
+  Why is that?
 </code></pre>
 
-<h1>define TRACE_FATAL(module, format, &#8230;) TRACE_IMPL(TRACE_LEVEL_FATAL, module, format, <strong>VA_ARGS</strong>)</h1>
+<p>This one is also pretty good:</p>
 
-<h1>define TRACE_ERROR(module, format, &#8230;) TRACE_IMPL(TRACE_LEVEL_ERROR, module, format, <strong>VA_ARGS</strong>)</h1>
+<pre><code>  I want to accomplish X.
 
-<h1>define TRACE_WARNING(module, format, &#8230;) TRACE_IMPL(TRACE_LEVEL_WARNING, module, format, <strong>VA_ARGS</strong>)</h1>
+  I thought I might be able to use facility Y.
 
-<h1>define TRACE_INFO(module, format, &#8230;) TRACE_IMPL(TRACE_LEVEL_INFO, module, format, <strong>VA_ARGS</strong>)</h1>
+  But Y doesn't seem like it's quite right, 
+  because of Z.
 
-<h1>define TRACE_DEBUG(module, format, &#8230;) TRACE_IMPL(TRACE_LEVEL_DEBUG, module, format, <strong>VA_ARGS</strong>)</h1>
-
-<p>void testTrace()
-{</p>
-
-<h1>define ENABLE_ACAS 1</h1>
-
-<h1>define ACAS_TRACE_LEVEL TRACE_LEVEL_FATAL</h1>
-
-<pre><code>TRACE_ERROR(ACAS, "Error\r\n");
-TRACE_FATAL(ACAS, "Fatal\r\n");
+  What should I use instead of Y, or how can I overcome Z?
 </code></pre>
 
-<h1>define ACAS_TRACE_LEVEL TRACE_LEVEL_INFO</h1>
+<p>— from <a href="https://groups.google.com/forum/?fromgroups=#!msg/comp.lang.perl/wu0T7a9orc0/3Q4PVIbEzZUJ" title="I never get answers to questions in newsgroups.">Re: system() question</a> by Mark-Jason Dominus</p></li>
+<li><p>TIP: How to post good questions
+In article <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#x66;&#x6c;&#x5f;&#97;&#x67;&#x67;&#105;&#101;&#45;&#50;&#x34;&#48;&#54;&#57;&#x38;&#49;&#50;&#52;&#x37;&#53;&#56;&#48;&#48;&#x30;&#x31;&#64;&#x61;&#x67;&#103;&#x69;&#x65;&#46;&#x63;&#x6f;&#x61;&#x70;&#x73;&#46;&#x66;&#115;&#x75;&#46;&#x65;&#100;&#117;">&#x66;&#x6c;&#95;&#97;&#x67;&#103;&#x69;&#x65;&#45;&#50;&#52;&#48;&#x36;&#57;&#x38;&#x31;&#50;&#x34;&#x37;&#53;&#56;&#x30;&#48;&#x30;&#x31;&#64;&#x61;&#103;&#x67;&#105;&#x65;&#46;&#99;&#111;&#97;&#112;&#115;&#x2e;&#x66;&#115;&#x75;&#x2e;&#x65;&#100;&#x75;</a>, I R A Aggie <a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#x66;&#x6c;&#x5f;&#x61;&#x67;&#103;&#105;&#101;&#x40;&#x74;&#x68;&#101;&#112;&#x65;&#x6e;&#116;&#x61;&#103;&#111;&#x6e;&#x2e;&#99;&#111;&#109;">&#x66;&#x6c;&#x5f;&#97;&#x67;&#x67;&#105;&#101;&#64;&#116;&#x68;&#101;&#112;&#x65;&#110;&#x74;&#97;&#103;&#x6f;&#x6e;&#x2e;&#99;&#111;&#109;</a> wrote:</p>
 
-<pre><code>TRACE_INFO(ACAS, "Info\r\n");
-TRACE_DEBUG(ACAS, "Debug\r\n");
+<blockquote><p>Dominus wrote:</p>
+
+<blockquote><p>&#8220;How do I use X to accomplish Y?&#8221; There&#8217;s nothing wrong with this,
+except that sometimes X is a chocolate-covered banana and Y is the
+integration of European currency systems.</p></blockquote></blockquote></li>
+</ul>
+
+
+<p>A less abominable example of this that comes up all the time is</p>
+
+<pre><code>I have an array of strings.  How do I check whether the array
+contains a certain string?
 </code></pre>
 
-<p>}</p>
+<p>Usually (not always, but usually) the best answer is to <code>unask the question</code>:</p>
 
-<hr />
+<pre><code>You should be using a hash, not an array.
+</code></pre>
+
+<p>I wish I had a convenient term for this kind of mistake. The general case is:</p>
+
+<ol>
+<li>Someone wants to accomplish task Y.</li>
+<li>They determine that a way to accomplish Y is to use facility X.</li>
+<li>There is a sub-task of Y, say Z, for which X is ill-suited.</li>
+<li>They come into the group and ask <code>"how can I use X to accomplish Z?"</code></li>
+</ol>
+
+
+<p>This is a problem for people here trying to answer the real question, which is:</p>
+
+<pre><code>How can I accomplish Y?
+</code></pre>
+
+<p>— from <a href="http://perl.plover.com/Questions3.html">TIP: How to post good questions</a> by Mark-Jason Dominus</p>
+
+<ul>
+<li>Too bad that the more general problem, X, is often considered off topic for this forum. Y has more of a chance to look like a Perl problem. <br>
+— from <a href="https://groups.google.com/forum/?fromgroups#!msg/comp.lang.perl.misc/rCCGCpipjH0/VUXQwCG8ICkJ">The XY problem (was Re: CGI.pm: controlling Back &amp; Reload)</a> by Bart Lateur</li>
+</ul>
+
 </div>
   
   
@@ -1124,6 +1269,10 @@ If all you have is a public key from a user in PuTTY-style format, you can conve
       </li>
     
       <li class="post">
+        <a href="/blog/2013/03/24/xy-problem/">XY Problem</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/03/22/semaphore/">Semaphore, Mutex, Critical section, SpinLock, Event</a>
       </li>
     
@@ -1133,10 +1282,6 @@ If all you have is a public key from a user in PuTTY-style format, you can conve
     
       <li class="post">
         <a href="/blog/2013/01/13/sftp-access-to-amazon-ec2-using-filezilla/">SFTP Access To Amazon EC2 Using FileZilla</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/13/setting-up-ftp-server-on-ubuntu-amazon-ec2/">Setting up FTP Server on Ubuntu - Amazon EC2</a>
       </li>
     
   </ul>
