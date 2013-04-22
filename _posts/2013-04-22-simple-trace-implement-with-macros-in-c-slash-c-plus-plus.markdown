@@ -179,7 +179,7 @@ C99 引入了对参数个数可变的函数式宏的正式支持。在宏 ``原�
 如果你需要替换宏, 使用一个 函数和一个非函数式宏, 如 #define printf myprintf  
 
 ## C/C++ TRACE
------------------------------------------------------------
+```
 
 #define ENABLE(x) ENABLE_##x
 #define TRACE_LEVEL(level) level##_TRACE_LEVEL
@@ -215,4 +215,4 @@ void testTrace()
     TRACE_DEBUG(ACAS, "Debug\r\n");
 }
 
------------------------------------------------------------
+```
