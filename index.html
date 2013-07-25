@@ -392,7 +392,7 @@ I guess there&#8217;s room for both kinds of answer. Or maybe there isn&#8217;t 
 
 <p>— from <a href="https://groups.google.com/forum/?fromgroups=#!msg/comp.lang.perl/wu0T7a9orc0/3Q4PVIbEzZUJ" title="I never get answers to questions in newsgroups.">Re: system() question</a> by Mark-Jason Dominus</p></li>
 <li><p>TIP: How to post good questions
-In article <a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#102;&#108;&#x5f;&#x61;&#x67;&#103;&#105;&#x65;&#45;&#x32;&#x34;&#x30;&#54;&#x39;&#x38;&#x31;&#50;&#x34;&#55;&#x35;&#x38;&#48;&#x30;&#x30;&#49;&#64;&#x61;&#x67;&#x67;&#x69;&#101;&#x2e;&#x63;&#x6f;&#97;&#x70;&#115;&#46;&#x66;&#x73;&#x75;&#x2e;&#101;&#x64;&#x75;">&#102;&#x6c;&#x5f;&#97;&#x67;&#103;&#x69;&#x65;&#x2d;&#x32;&#x34;&#48;&#x36;&#57;&#56;&#x31;&#x32;&#x34;&#55;&#53;&#x38;&#48;&#48;&#x30;&#x31;&#64;&#97;&#103;&#103;&#105;&#x65;&#x2e;&#x63;&#x6f;&#97;&#112;&#115;&#46;&#102;&#115;&#117;&#x2e;&#x65;&#100;&#117;</a>, I R A Aggie <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x66;&#x6c;&#x5f;&#x61;&#103;&#103;&#x69;&#101;&#x40;&#x74;&#x68;&#101;&#x70;&#101;&#x6e;&#x74;&#x61;&#103;&#111;&#x6e;&#46;&#x63;&#x6f;&#x6d;">&#x66;&#108;&#x5f;&#97;&#x67;&#103;&#105;&#101;&#x40;&#x74;&#x68;&#101;&#x70;&#x65;&#x6e;&#116;&#x61;&#x67;&#x6f;&#x6e;&#46;&#99;&#111;&#x6d;</a> wrote:</p>
+In article <a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#102;&#x6c;&#x5f;&#97;&#103;&#103;&#x69;&#101;&#45;&#x32;&#52;&#48;&#x36;&#x39;&#x38;&#x31;&#x32;&#52;&#x37;&#x35;&#x38;&#48;&#x30;&#48;&#49;&#x40;&#x61;&#103;&#103;&#105;&#101;&#x2e;&#x63;&#x6f;&#x61;&#x70;&#115;&#46;&#x66;&#115;&#117;&#x2e;&#x65;&#100;&#x75;">&#x66;&#x6c;&#x5f;&#97;&#x67;&#x67;&#x69;&#101;&#x2d;&#50;&#52;&#48;&#54;&#x39;&#56;&#x31;&#x32;&#52;&#55;&#x35;&#56;&#48;&#x30;&#48;&#49;&#64;&#x61;&#103;&#x67;&#x69;&#101;&#46;&#99;&#x6f;&#x61;&#x70;&#x73;&#46;&#x66;&#115;&#117;&#46;&#101;&#100;&#117;</a>, I R A Aggie <a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x66;&#x6c;&#95;&#x61;&#103;&#103;&#105;&#x65;&#64;&#x74;&#x68;&#x65;&#112;&#101;&#110;&#116;&#97;&#103;&#x6f;&#110;&#x2e;&#x63;&#x6f;&#x6d;">&#102;&#108;&#x5f;&#97;&#x67;&#x67;&#105;&#x65;&#64;&#x74;&#x68;&#101;&#112;&#101;&#110;&#x74;&#x61;&#103;&#111;&#x6e;&#46;&#99;&#x6f;&#x6d;</a> wrote:</p>
 
 <blockquote><p>Dominus wrote:</p>
 
@@ -798,33 +798,46 @@ Using safely remove hardware icon disconnect the disk. Replug it and try the pro
 <ol>
 <li>设置BIOS引导盘为<code>移动硬盘</code>（也可以是U盘或是其它安装盘); 启动电脑；进入到grub4dos界面；如下图所示（图1）：<br/>
 <img src="/images/2013/01/13/grub-init-interface.png" alt="Grub Init Interface" /></li>
-<li><p>在GRUB命令模式下执行以下命令：</p>
+<li><p>在GRUB命令模式下执行以下命令(注：命令要一字不差的全部输入，一行为一条命令，没有注释)：</p>
 
-<pre><code> find --set-root /win7p64.iso  
- map /win7p64.iso (0xff)  
- map --hook  
- chainloader (0xff)  
+<pre><code> find --set-root /win7p64.iso
+ map /win7p64.iso (0xff)
+ map --hook
+ chainloader (0xff)
  boot
+</code></pre></li>
+</ol>
+
+
+<p>如果显示的win7p64.iso所在磁盘位置为(hd0,0)
+那么重启电脑，执行以下命令:</p>
+
+<pre><code>    map (hd0) (hd1)
+    map (hd1) (hd0)
+    find --set-root /win7p64.iso
+    map /win7p64.iso (0xff)
+    map --hook
+    chainloader (0xff)
+    boot
 </code></pre>
 
-<p>执行情况如下图所示（图2）:<br/>
-<img src="/images/2013/01/13/grub-commands.png" alt="Grub Commands" /></p></li>
-<li>下面进入正常的Win7安装,直到下图所示界面（图3）:<br/>
-<img src="/images/2013/01/13/grub-no-dvd-error.jpg" alt="No CD/DVD" /></li>
-<li><p>上一步就因为找不到真实的光驱,所以报错,此时点击<code>Shift+F10</code>调出CMD窗口， 通过imdisk挂载<code>win7p64.iso</code>为虚拟光驱;执行以下一系列命令:</p>
+<p>一般情况下执行情况如下图所示（图2）:<br/>
+<img src="/images/2013/01/13/grub-commands.png" alt="Grub Commands" />
+3. 下面进入正常的Win7安装,直到下图所示界面（图3）:<br/>
+<img src="/images/2013/01/13/grub-no-dvd-error.jpg" alt="No CD/DVD" />
+4. 上一步就因为找不到真实的光驱,所以报错,此时点击<code>Shift+F10</code>调出CMD窗口， 通过imdisk挂载<code>win7p64.iso</code>为虚拟光驱;执行以下一系列命令:</p>
 
-<pre><code> pushd X: (您那里可能是E: F:，即VMware虚拟硬盘所在的盘符,此为注释)
- rundll32.exe setupapi.dll,InstallHinfSection DefaultInstall 132 .\imdisk.inf (安装驱动，稍等几秒,等待安装成功,很快的)  
- imdisk -a -f "win7p64.iso" -m #:
+<pre><code>    cd /d X:/imdisk (您那里可能是E: F:，即VMware虚拟硬盘所在的盘符,此为注释，或者U盘)
+    install.bat
+    cd ..
+    imdisk -a -f "win7p64.iso" -m #:
 </code></pre>
 
 <p>执行情况如下图所示:<br/>
-<img src="/images/2013/01/13/grub-install-dvd.jpg" alt="Install Virtual DVD" /></p></li>
-<li>执行完上一步,关闭cmd窗口,再关闭另外的可看到的那几个窗口,会返回到（图4）<br/>
-<img src="/images/2013/01/13/grub-os-start-install.jpg" alt="Start Install OS" /></li>
-<li>点击&#8221;现在安装&#8221;,以下就和DVD光盘安装一样了,后面在重新启动机器的时候可以拔掉移动硬盘或USB设备(防止再从安装盘启动)</li>
-</ol>
-
+<img src="/images/2013/01/13/grub-install-dvd.jpg" alt="Install Virtual DVD" />
+5. 执行完上一步,关闭cmd窗口,再关闭另外的可看到的那几个窗口,会返回到（图4）<br/>
+<img src="/images/2013/01/13/grub-os-start-install.jpg" alt="Start Install OS" />
+6. 点击&#8221;现在安装&#8221;,以下就和DVD光盘安装一样了,后面在重新启动机器的时候可以拔掉移动硬盘或USB设备(防止再从安装盘启动)</p>
 </div>
   
   
