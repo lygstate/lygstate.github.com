@@ -21,6 +21,27 @@ categories:
 为了方便抓图，这里在VMware里用第二块硬盘模拟`移动硬盘`操作，假设该移动硬盘只有一个分区，并且识别成盘符X:  
 ###### `制作移动硬盘:`
 * 解压缩下载到的[grubinst]， 执行里面的`grubinst_gui.exe`（以管理员模式运行），选择要写入的`磁盘`（这里是`移动硬盘`）,点击`安装`。
+ * 如果有错误 `grubinst: Bad partition table, if you're sure that the partition list is ok, please run this program again with --skip-mbr-test option.`
+   此时可以通过一下方法解决：`Go to disk management. Backup data if you have such on the USB disk. Delete all partitions. Create new ones. Set first one active.
+Using safely remove hardware icon disconnect the disk. Replug it and try the program again. `
+ * 如果无法删除所有分区，那么需要通过以下操作实现删除所有分区:
+```
+There's no need to install any third-party programs, Windows already includes everything you need. Just open up command prompt and enter the following commands in sequence:
+
+DISKPART
+LIST DISK
+Select the disk that you want to correct. Example: I want to remove all partitions on Disk 1:
+
+SELECT DISK 1
+RECOVER
+If the RECOVER command doesn't work, try CLEAN.
+
+Disk 1 will be recovered as one complete disk.
+
+FORMAT <option>
+Where <options> represent what formatting method you'd prefer. Alternatively, use QUICK.
+```
+ 
 * 解压缩下载到的[grub4dos]， 复制里面的文件到`移动硬盘X:`根目录下。删除根目录下的`menu.lst`(让其自动进入命令模式)
 * 解压缩下载到的[ImDisk]; 如果是可执行文件，照样可以解压缩。复制里面的文件到`移动硬盘X:`根目录下
 * 复制win7p64.iso到`移动硬盘X:`根目录
