@@ -134,21 +134,34 @@ Contig.exe的意义是为了让win7p64.iso连续存储； grub4dos需要调用 `
 ###### **`安装操作系统:`**
 1. 设置BIOS引导盘为`移动硬盘`（也可以是U盘或是其它安装盘); 启动电脑；进入到grub4dos界面；如下图所示（图1）：  
 ![Grub Init Interface](/images/2013/01/13/grub-init-interface.png)
-2. 在GRUB命令模式下执行以下命令：
+2. 在GRUB命令模式下执行以下命令(注：命令要一字不差的全部输入，一行为一条命令，没有注释)：
 
-	    find --set-root /win7p64.iso  
-	    map /win7p64.iso (0xff)  
-	    map --hook  
-	    chainloader (0xff)  
+	    find --set-root /win7p64.iso
+	    map /win7p64.iso (0xff)
+	    map --hook
+	    chainloader (0xff)
 	    boot
-执行情况如下图所示（图2）:  
+
+如果显示的win7p64.iso所在磁盘位置为(hd0,0)
+那么重启电脑，执行以下命令:
+
+	    map (hd0) (hd1)
+	    map (hd1) (hd0)
+	    find --set-root /win7p64.iso
+	    map /win7p64.iso (0xff)
+	    map --hook
+	    chainloader (0xff)
+	    boot
+
+一般情况下执行情况如下图所示（图2）:  
 ![Grub Commands](/images/2013/01/13/grub-commands.png)
 3. 下面进入正常的Win7安装,直到下图所示界面（图3）:  
 ![No CD/DVD](/images/2013/01/13/grub-no-dvd-error.jpg)
 4. 上一步就因为找不到真实的光驱,所以报错,此时点击`Shift+F10`调出CMD窗口， 通过imdisk挂载`win7p64.iso`为虚拟光驱;执行以下一系列命令:
 
-		pushd X: (您那里可能是E: F:，即VMware虚拟硬盘所在的盘符,此为注释)
-		rundll32.exe setupapi.dll,InstallHinfSection DefaultInstall 132 .\imdisk.inf (安装驱动，稍等几秒,等待安装成功,很快的)  
+		cd /d X:/imdisk (您那里可能是E: F:，即VMware虚拟硬盘所在的盘符,此为注释，或者U盘)
+		install.bat
+		cd ..
 		imdisk -a -f "win7p64.iso" -m #:
 执行情况如下图所示:  
 ![Install Virtual DVD](/images/2013/01/13/grub-install-dvd.jpg)
