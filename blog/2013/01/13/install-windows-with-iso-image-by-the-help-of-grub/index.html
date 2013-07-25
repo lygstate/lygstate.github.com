@@ -114,6 +114,44 @@
 
 <ul>
 <li>解压缩下载到的<a href="http://download.gna.org/grubutil/grubinst-1.1-bin-w32-2008-01-01.zip">grubinst</a>， 执行里面的<code>grubinst_gui.exe</code>（以管理员模式运行），选择要写入的<code>磁盘</code>（这里是<code>移动硬盘</code>）,点击<code>安装</code>。</li>
+<li>如果有错误 <code>grubinst: Bad partition table, if you're sure that the partition list is ok, please run this program again with --skip-mbr-test option.</code>
+此时可以通过一下方法解决：<code>Go to disk management. Backup data if you have such on the USB disk. Delete all partitions. Create new ones. Set first one active.
+Using safely remove hardware icon disconnect the disk. Replug it and try the program again.</code></li>
+<li>如果无法删除所有分区，那么需要通过以下操作实现删除所有分区:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>There's no need to install any third-party programs, Windows already includes everything you need. Just open up command prompt and enter the following commands in sequence:
+</span><span class='line'>
+</span><span class='line'>DISKPART
+</span><span class='line'>LIST DISK
+</span><span class='line'>Select the disk that you want to correct. Example: I want to remove all partitions on Disk 1:
+</span><span class='line'>
+</span><span class='line'>SELECT DISK 1
+</span><span class='line'>RECOVER
+</span><span class='line'>If the RECOVER command doesn't work, try CLEAN.
+</span><span class='line'>
+</span><span class='line'>Disk 1 will be recovered as one complete disk.
+</span><span class='line'>
+</span><span class='line'>FORMAT &lt;option&gt;
+</span><span class='line'>Where &lt;options&gt; represent what formatting method you'd prefer. Alternatively, use QUICK.</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
 <li>解压缩下载到的<a href="http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip">grub4dos</a>， 复制里面的文件到<code>移动硬盘X:</code>根目录下。删除根目录下的<code>menu.lst</code>(让其自动进入命令模式)</li>
 <li>解压缩下载到的<a href="http://www.ltr-data.se/opencode.html/#ImDisk">ImDisk</a>; 如果是可执行文件，照样可以解压缩。复制里面的文件到<code>移动硬盘X:</code>根目录下</li>
 <li>复制win7p64.iso到<code>移动硬盘X:</code>根目录</li>
