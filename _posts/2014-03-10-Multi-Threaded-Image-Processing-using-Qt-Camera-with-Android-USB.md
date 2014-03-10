@@ -28,25 +28,30 @@ The QML camera component provides basic means to view and capture camera images 
 
 ### Project Preparation
 
-First, the Qt Mobility dependency and Symbian capabilities have to be added to the project (\*.pro) file: `
+First, the Qt Mobility dependency and Symbian capabilities have to be added to the project (\*.pro) file:
+
+```
 symbian: {
     TARGET.CAPABILITY += LocalServices \  # camera
          ReadUserData \                   #
          WriteUserData \                  # writing image file
          UserEnvironment                  # camera
 }
-` On Symbian, depending on the expected memory usage the heap- and stack sizes should be increased as well: `
+```
+On Symbian, depending on the expected memory usage the heap- and stack sizes should be increased as well:
+
+```
 symbian: {
     TARGET.EPOCSTACKSIZE = 0x14000
     TARGET.EPOCHEAPSIZE = 0x20000 0x8000000
 }
-`
+```
 
 ### Receiving viewfinder frames from the camera
 
 To receive video frames from the camera the [QAbstractVideoSurface](http://doc.qt.nokia.com/qtmobility/qabstractvideosurface.html) has to be implemented. The video surface has basically two functions: First, it tells the camera which image formats (for instance ARGB, UYVY, etc.) are supported by our application. Our sample application supports ARGB format only (caution: the Nokia N9 supports only UYVY format, thus either the effect processing has to be changed, or the UYVY data has to be converted to ARGB format before processing as for instance described [here](MeeGo_Camera_VideoSurface_manipulation "wikilink")):
 
-`
+```
 QList<QVideoFrame::PixelFormat> VideoSurface::supportedPixelFormats(
         QAbstractVideoBuffer::HandleType handleType) const
 {
@@ -54,14 +59,16 @@ QList<QVideoFrame::PixelFormat> VideoSurface::supportedPixelFormats(
 
     return QList<QVideoFrame::PixelFormat>() << QVideoFrame::Format_ARGB32; //N9: Format_UYVY
 }
-`
+```
 
-Second it notifies our application over the FrameObserver interface when new image data is available: `
+Second it notifies our application over the FrameObserver interface when new image data is available:
+
+```
 class FrameObserver {
 public:
     virtual bool updateFrame(const QVideoFrame &frame) = 0;
 };
-`
+```
 
 ### Defining a custom QML camera view
 
@@ -301,7 +308,9 @@ emits two different signals:
 -     
     the effect’s parameter value.
 
- New viewfinder frames are added to the worker thread with the following method: `
+ New viewfinder frames are added to the worker thread with the following method:
+ 
+```
 void FIPThread::setNewFrame(QVideoFrame *ptrFrame)
 {
     // Drop frame if last frame is still being processed or not in live mode
@@ -331,7 +340,12 @@ void FIPThread::setNewFrame(QVideoFrame *ptrFrame)
         m_condition.wakeOne();
     }
 }
-` The method copies the frame data to the locked double buffer, and starts or restarts the thread. The [QMutexLocker](http://doc.qt.nokia.com/4.7/qmutexlocker.html) is used to automatically release the mutex lock when the method is left. For full-resolution captured images the following method is used which incorporates decoding of the frame data (from usually EXIF Jpeg) to QImage: `
+```
+
+The method copies the frame data to the locked double buffer, and starts or restarts the thread. The [QMutexLocker](http://doc.qt.nokia.com/4.7/qmutexlocker.html) is used to automatically release the mutex lock when the method is left. For full-resolution captured images the following method is used which incorporates decoding of the frame data (from usually EXIF Jpeg) to QImage: 
+
+
+```
 void FIPThread::setFullResolutionFrame(QVideoFrame *ptrFrame)
 {
     QMutexLocker locker(&m_mutex);
@@ -354,9 +368,11 @@ void FIPThread::setFullResolutionFrame(QVideoFrame *ptrFrame)
         }
     }
 }
-`
+```
 
-The image processing is performed in the thread’s method: `
+The image processing is performed in the thread’s method: 
+
+```
 void FIPThread::run()
 {
     forever
@@ -427,7 +443,7 @@ void FIPThread::run()
         m_mutex.unlock();
     }
 }
-`
+```
 
 First we copy member variables to local variables which might change outside the run loop during processing. A mutex locks to prevent concurrent access to memory during copying. In live mode the buffers are swapped after processing while in capture mode the full resolution image is processed, saved to a file, and memory is freed. Finally we check if the thread is about to exit (==true) or more work has to be done (==true). If both, and , evaluate to false then we wait for more work.
 
