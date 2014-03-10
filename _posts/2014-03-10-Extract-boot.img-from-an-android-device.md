@@ -10,7 +10,10 @@ I did this on my rooted, boot-unlocked Nexus 7 II running Android 4.4.2 under Wi
 
 [This tutorial](http://android-dls.com/wiki/index.php?title=HOWTO:_Unpack%2C_Edit%2C_and_Re-Pack_Boot_Images "HOWTO: Unpack, Edit, and Re-Pack Boot Images") pointed me in the right direction.
 
-I did:
+###boot.img Retrieve Instructions
+
+I use adb tools to retrieve the desired `boot-from-android-device.img`, after that, I use `Root Explorer` to copy the file, so that
+we can copy the file to computer through MTP:
 
 ```
 ;use the following commands to found the boot partition,note:msm_sdcc.1 is different on different android device
@@ -25,19 +28,8 @@ cat /dev/block/mmcblk0p14 > /sdcard/boot-from-android-device.img
 chmod 0666 /sdcard/boot-from-android-device.img
 ```
 
-Then put it right back using:
-
-```
-adb reboot-bootloader
-;[wait for bootloader to come up]
-fastboot flash boot boot-from-android-device-repacked.img
-fastboot reboot
-```
-
-I use 
-I use [Android Image Kitchen](http://forum.xda-developers.com/showthread.php?t=2073775 "Android Image Kitchen -- Unpack/Repack Kernel+Recovery Images, and Edit the ramdisk.") to unpack the boot.img and repack it to boot-from-android-device-repacked.img.
-
 ###Repack Instructions
+I use [Android Image Kitchen](http://forum.xda-developers.com/showthread.php?t=2073775 "Android Image Kitchen -- Unpack/Repack Kernel+Recovery Images, and Edit the ramdisk.") to unpack the boot.img and repack it to boot-from-android-device-repacked.img.
 
 ```
 1) Unzip
@@ -46,3 +38,15 @@ I use [Android Image Kitchen](http://forum.xda-developers.com/showthread.php?t=2
 4) The repackimg batch script requires no input and simply recombines the previously split zImage with the newly packed modified ramdisk using all the original image information (which was also split and saved).
 5) The cleanup batch script resets the folder to its initial state, removing the split_img+ramdisk directories and any new packed ramdisk or image files.
 ```
+
+
+###Write the boot.img back to the Android device.
+I use fastboot tool to do the job.
+
+```
+adb reboot-bootloader
+;[wait for bootloader to come up]
+fastboot flash boot boot-from-android-device-repacked.img
+fastboot reboot
+```
+
