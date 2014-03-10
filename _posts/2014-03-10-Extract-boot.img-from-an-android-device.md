@@ -11,15 +11,24 @@ I did this on my rooted, boot-unlocked Nexus 7 II running Android 4.4.2 under Wi
 I did:
 
 ```
-$ adb pull /dev/mtd/mtd2 boot-from-android-device.img
+;use the following commands to found the boot partition,note:msm_sdcc.1 is different on different android device
+adb shell
+ls -l /dev/block/platform/
+;now we know the device platform is msm_sdcc.1
+ls -l /dev/block/platform/msm_sdcc.1/by-name
+; now we know the boot partition is cat mmcblk0p14 by [boot -> /dev/block/mmcblk0p14]
+;use the following command to retrieve the boot.img
+su
+cat /dev/block/mmcblk0p14 > /sdcard/boot-from-android-device.img
+chmod 0666 /sdcard/boot-from-android-device.img
 ```
 
 Then put it right back using:
 
 ```
-$ adb reboot bootloader
-[wait for bootloader to come up]
-$ sudo ./fastboot flash boot boot-from-android-device.img
-$ sudo ./fastboot reboot
+adb reboot bootloader
+;[wait for bootloader to come up]
+fastboot flash boot boot-from-android-device.img
+fastboot reboot
 ```
 I use [Boot\Recovery RePacker ](http://boot-repacker.blogspot.sg/p/blog-page.html "Boot\Recovery RePacker ") to unpack the boot.img and repack it.
