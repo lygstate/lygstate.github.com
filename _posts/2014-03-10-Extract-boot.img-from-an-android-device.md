@@ -31,4 +31,16 @@ adb reboot-bootloader
 fastboot flash boot boot-from-android-device-repacked.img
 fastboot reboot
 ```
-I use [Boot\Recovery RePacker ](http://boot-repacker.blogspot.sg/p/blog-page.html "Boot\Recovery RePacker ") to unpack the boot.img and repack it to boot-from-android-device-repacked.img.
+
+I use 
+I use [Android Image Kitchen](http://forum.xda-developers.com/showthread.php?t=2073775 "Android Image Kitchen -- Unpack/Repack Kernel+Recovery Images, and Edit the ramdisk.") to unpack the boot.img and repack it to boot-from-android-device-repacked.img.
+
+###Repack Instructions
+
+```
+1) Unzip
+2) Either use the command-line "unpackimg <image-filename.img>", or simply drag-and-drop the image. This will split the image and unpack the ramdisk to a subdirectory.
+3) Alter the ramdisk as you like.
+4) The repackimg batch script requires no input and simply recombines the previously split zImage with the newly packed modified ramdisk using all the original image information (which was also split and saved).
+5) The cleanup batch script resets the folder to its initial state, removing the split_img+ramdisk directories and any new packed ramdisk or image files.
+```
