@@ -26,9 +26,9 @@ chmod 0666 /sdcard/boot-from-android-device.img
 Then put it right back using:
 
 ```
-adb reboot bootloader
+adb reboot-bootloader
 ;[wait for bootloader to come up]
-fastboot flash boot boot-from-android-device.img
+fastboot flash boot boot-from-android-device-repacked.img
 fastboot reboot
 ```
-I use [Boot\Recovery RePacker ](http://boot-repacker.blogspot.sg/p/blog-page.html "Boot\Recovery RePacker ") to unpack the boot.img and repack it.
+I use [Boot\Recovery RePacker ](http://boot-repacker.blogspot.sg/p/blog-page.html "Boot\Recovery RePacker ") to unpack the boot.img and repack it to boot-from-android-device-repacked.img.
