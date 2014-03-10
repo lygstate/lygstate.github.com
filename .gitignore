@@ -1,4 +1,3 @@
-/stylesheets/screen.css
-*-MarkdownPadPreview
-*-MarkdownPadPreview.*
-_site
+_config.yml
+_site/*
+*Thumbs.db
