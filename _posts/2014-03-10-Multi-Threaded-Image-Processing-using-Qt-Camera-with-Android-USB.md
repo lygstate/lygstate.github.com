@@ -2,6 +2,8 @@
 layout: post
 title:  "Multi-Threaded Image Processing using Qt Camera with Android USB."
 published: true
+fullview: true
+categories: []
 ---
 
 Introduction

@@ -2,8 +2,10 @@
 layout: post
 title: "Simple Trace implement with macros in C/C++"
 date: 2013-04-22 16:54
+published: true
 comments: true
-categories: 
+fullview: true
+categories: []
 ---
 [Permalink](http://www.cnblogs.com/alexshi/archive/2012/03/09/2388453.html "Permalink to C语言 ## __VA_ARGS__ 宏 - AlexShi")
 

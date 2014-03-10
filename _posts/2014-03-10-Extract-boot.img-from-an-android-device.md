@@ -2,6 +2,8 @@
 layout: post
 title:  "Extract boot.img from an android device, unpack/repack it, and write it back to the android device."
 published: true
+fullview: true
+categories: []
 ---
 
 I did this on my rooted, boot-unlocked Nexus 7 II running Android 4.4.2 under Windows.

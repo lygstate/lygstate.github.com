@@ -2,8 +2,10 @@
 layout: post
 title: Show All Running Processes in Linux
 date: 2013-01-13 00:01
+published: true
 comments: true
-categories: linux,process,list
+fullview: true
+categories: [linux,process,list]
 ---
 
 [Permalink](http://www.cyberciti.biz/faq/show-all-running-processes-in-linux/ "Permalink to Show All Running Processes in Linux")

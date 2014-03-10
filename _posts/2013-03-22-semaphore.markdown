@@ -2,8 +2,10 @@
 layout: post
 title: "Semaphore, Mutex, Critical section, SpinLock, Event"
 date: 2013-03-22 17:06
+published: true
 comments: true
-categories: 
+fullview: true
+categories: []
 ---
 
 ####Critical Section

@@ -2,8 +2,10 @@
 layout: post
 title: "XY Problem"
 date: 2013-03-24 01:52
+published: true
 comments: true
-categories: 
+fullview: true
+categories: []
 ---
 
 ### "XY Problem" explanations by various people:
