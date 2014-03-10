@@ -527,7 +527,9 @@ Intensity = (red*76 + green*149 + blue*29) >> 8;
 
 ### Adding a control for live user interaction
 
-Our simple black and white effect has one parameter, a threshold, which decides which intensities are marked as black, and which ones are white. In the QML file we add a slider to control this threshold: `
+Our simple black and white effect has one parameter, a threshold, which decides which intensities are marked as black, and which ones are white. In the QML file we add a slider to control this threshold:
+
+```C++
 Slider {
     id: sldThreshold
     minimumValue: 0
@@ -536,7 +538,9 @@ Slider {
     orientation: Qt.Vertical
     onValueChanged: camera.effectThreshold = value
 }
-` Each time the slider’s value is changed, the component is notified which forwards the parameter to the worker thread: `
+```
+
+Each time the slider’s value is changed, the component is notified which forwards the parameter to the worker thread: `
 void CustomCamera::effectThreshold(int thresh)
 {
     m_fipThread->setEffectThreshold(thresh);
