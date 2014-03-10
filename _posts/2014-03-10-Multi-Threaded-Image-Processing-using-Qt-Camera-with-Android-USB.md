@@ -431,7 +431,9 @@ void FIPThread::run()
 
 First we copy member variables to local variables which might change outside the run loop during processing. A mutex locks to prevent concurrent access to memory during copying. In live mode the buffers are swapped after processing while in capture mode the full resolution image is processed, saved to a file, and memory is freed. Finally we check if the thread is about to exit (==true) or more work has to be done (==true). If both, and , evaluate to false then we wait for more work.
 
-To get the latest processed viewfinder image the following method is used: `
+To get the latest processed viewfinder image the following method is used:
+
+```
 QImage * FIPThread::getLatestProcessedImage()
 {
     m_mutex.lock();
@@ -442,7 +444,9 @@ QImage * FIPThread::getLatestProcessedImage()
     }
     return &m_frames[m_frameIdx];
 }
-` The mutex is locked to prevent writing to the image buffer during reading. Thus, after reading it has to be released: `
+```
+
+The mutex is locked to prevent writing to the image buffer during reading. Thus, after reading it has to be released: `
 void FIPThread::getLatestProcessedImageReady()
 {
     m_mutex.unlock();
