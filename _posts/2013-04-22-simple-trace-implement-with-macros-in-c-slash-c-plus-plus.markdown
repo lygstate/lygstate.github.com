@@ -9,7 +9,7 @@ categories: []
 ---
 [Permalink](http://www.cnblogs.com/alexshi/archive/2012/03/09/2388453.html "Permalink to C语言 ## __VA_ARGS__ 宏 - AlexShi")
 
-## C语言`## __VA_ARGS__`宏
+## C语言`##`和`__VA_ARGS__`宏
 
 在GNU C中，宏可以接受可变数目的参数，就象函数一样，例如:   
 
