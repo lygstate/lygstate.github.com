@@ -17,9 +17,9 @@ Image processing is a resource intensive task. This article describes means how 
 -   Discussion about hardware acceleration.
 -   Conclusion.
 
-The code provided here shows only the most important functional parts. The full code can be downloaded ![here](Fipcamera.zip "fig:here").
+The code provided here shows only the most important functional parts.
+ The full code can be downloaded from [here](http://developer.nokia.com/community/wiki/File:Fipcamera.zip "Fipcamera.zip").
 
-<File:Fipscamera> 1336545122130.jpg|FIP Camera Mainview <File:Fipscamera> 1336545141933.jpg|FIP Camera processing full resolution snapshot
 
 Using the Qt Mobility Camera in QML
 -----------------------------------
@@ -38,7 +38,7 @@ symbian: {
          UserEnvironment                  # camera
 }
 ```
-On Symbian, depending on the expected memory usage the heap- and stack sizes should be increased as well:
+On Symbian, depending on the expected memory usage the heap and stack sizes should be increased as well:
 
 ```
 symbian: {
@@ -49,7 +49,12 @@ symbian: {
 
 ### Receiving viewfinder frames from the camera
 
-To receive video frames from the camera the [QAbstractVideoSurface](http://doc.qt.nokia.com/qtmobility/qabstractvideosurface.html) has to be implemented. The video surface has basically two functions: First, it tells the camera which image formats (for instance ARGB, UYVY, etc.) are supported by our application. Our sample application supports ARGB format only (caution: the Nokia N9 supports only UYVY format, thus either the effect processing has to be changed, or the UYVY data has to be converted to ARGB format before processing as for instance described [here](MeeGo_Camera_VideoSurface_manipulation "wikilink")):
+To receive video frames from the camera the [QAbstractVideoSurface](http://qt.apidoc.info/5.2.0/qtmultimedia/qabstractvideosurface.html)
+ has to be implemented. The video surface has basically two functions:
+ First, it tells the camera which image formats (for instance ARGB, UYVY, etc.) are supported by our application.
+ Our sample application supports ARGB format only (caution: the Nokia N9 supports only UYVY format,
+ thus either the effect processing has to be changed, or the UYVY data has to be converted to ARGB
+ format before processing as for instance described [here](MeeGo_Camera_VideoSurface_manipulation "wikilink")):
 
 ```
 QList<QVideoFrame::PixelFormat> VideoSurface::supportedPixelFormats(
@@ -83,7 +88,7 @@ Next we define the class in C++ which communicates with the camera hardware usin
 -     
     a parameter for our live image processing effect.
 
-`
+```
 class CustomCamera : public QDeclarativeItem, public FrameObserver
 {
     Q_OBJECT
@@ -97,9 +102,11 @@ class CustomCamera : public QDeclarativeItem, public FrameObserver
 
     // Effect properties
     Q_PROPERTY(int effectThreshold READ effectThreshold WRITE effectThreshold)
-`
+```
 
-The method which receives viewfinder images is implemented from the interface. If the worker thread is not busy then the frame is copied for later processing, else it is dropped. `
+The method which receives viewfinder images is implemented from the interface. If the worker thread is not busy then the frame is copied for later processing, else it is dropped.
+
+```
 bool CustomCamera::updateFrame(const QVideoFrame &frame)
 {
     if (!frame.isValid()) {
@@ -119,9 +126,11 @@ bool CustomCamera::updateFrame(const QVideoFrame &frame)
 
      return true;
 }
-`
+```
 
-Next we define the start method to initialize and start the camera: `
+Next we define the start method to initialize and start the camera:
+
+```
 void CustomCamera::start(const QString &device)
 {
     destroyResources();
@@ -161,9 +170,14 @@ void CustomCamera::start(const QString &device)
     // Begin the receiving of view finder frames.
     m_camera->start();
 }
-`
+```
 
-The capture destination is set to [QCameraImageCapture::CaptureToBuffer](http://doc.qt.nokia.com/qtmobility/qcameraimagecapture.html#CaptureDestination-enum) resulting in an image buffer of the captured image (instead of automatically writing it to a file). This method is available since Qt Mobility 1.2. The captured image buffer is sent through the slot . When a full-resolution picture arrives it is copied to the worker thread ([see next section](#workerthreadsection "wikilink")). `
+The capture destination is set to [QCameraImageCapture::CaptureToBuffer](http://qt.apidoc.info/5.2.0/qtmultimedia/qcameraimagecapture.html#CaptureDestination-enum)
+ resulting in an image buffer of the captured image (instead of automatically writing it to a file).
+ This method is available since Qt Mobility 1.2. The captured image buffer is sent through the slot.
+ When a full-resolution picture arrives it is copied to the worker thread ([see next section](#workerthreadsection "wikilink")).
+
+```
 void CustomCamera::imageAvailable(int id, const QVideoFrame &frame)
 {
     if (frame.map(QAbstractVideoBuffer::ReadOnly))
@@ -172,12 +186,20 @@ void CustomCamera::imageAvailable(int id, const QVideoFrame &frame)
         frame.unmap();
     }
 }
-` The worker thread notifies the class when a viewfinder image is processed and tells the QML view to repaint (update): `
+```
+
+The worker thread notifies the class when a viewfinder image is processed and tells the QML view to repaint (update):
+
+```
 void CustomCamera::processedFrameAvailable()
 {
     update();
 }
-` The method pulls the latest processed image from the worker thread and draws it on the center of the QML view: `
+```
+
+The method pulls the latest processed image from the worker thread and draws it on the center of the QML view:
+
+```
 void CustomCamera::paint(QPainter *painter,
                          const QStyleOptionGraphicsItem *option,
                          QWidget *widget)
@@ -207,7 +229,15 @@ void CustomCamera::paint(QPainter *painter,
         m_fipThread->getLatestProcessedImageReady();
     }
 }
-` The paint method presented above works only in Symbian. In Meego we have to draw the image using an OpenGL texture and OpenGL ES 2 shaders because the output of is overwritten by the OpenGL drawing routines. QML 2.0 which will be included with Qt 5.0 offers a [scene graph API](http://labs.qt.nokia.com/2011/05/31/qml-scene-graph-in-master/) which hides the OpenGL complexity from the user and allows painting of QImages on the Nokia N9 as well. The procedure for drawing in OpenGL is as follows (not included in the example source code): `
+```
+
+The paint method presented above works only in Symbian. In Meego we have to draw the image using
+ an OpenGL texture and OpenGL ES 2 shaders because the output of is overwritten by the OpenGL
+ drawing routines. QML 2.0 which will be included with Qt 5.0 offers a [scene graph API](http://labs.qt.nokia.com/2011/05/31/qml-scene-graph-in-master/)
+ which hides the OpenGL complexity from the user and allows painting of QImages on the Nokia N9 as well.
+ The procedure for drawing in OpenGL is as follows (not included in the example source code):
+
+```
 painter->beginNativePainting();
 // 1.) Upload texture
 glBindTexture(...);
@@ -219,16 +249,22 @@ glBindProgram(program_id);
 // 3.) Draw geometry with texture
 glDrawElements(...);
 painter->endNativePainting();
-`
+```
 
-Before we can use our class in QML, it has to be registered somewhere before loading the QML source code (e.g. in the application’s main method): `
+Before we can use our class in QML, it has to be registered somewhere before loading the QML source code (e.g. in the application’s main method):
+
+```
 void FIPMain::show()
 {
     qmlRegisterType<CustomCamera>("CustomElements", 1, 0, "CustomCamera");
     m_qmlView.setSource(QUrl("qrc:/qml/MainView.qml"));
     m_qmlView.showFullScreen();
 }
-` The can now be easily used in QML: `
+```
+
+The can now be easily used in QML:
+
+```
 import CustomElements 1.0
 
 Page {
@@ -241,12 +277,16 @@ Page {
         anchors.fill: parent
     }
 }
-`
+```
 
  Spawning a worker thread for background image processing
 ---------------------------------------------------------
 
-To keep the user interface responsive a worker thread is created which handles all image effect processing. More information about threading in Qt can be found [here](http://doc.qt.nokia.com/4.7/thread-basics.html). First, we define our class FIPThread which is responsible for image processing work: `
+To keep the user interface responsive a worker thread is created which handles
+ all image effect processing. More information about threading in Qt can be found
+ [here](http://qt.apidoc.info/5.2.0/qtdoc/thread-basics.html). First, we define our class FIPThread which is responsible for image processing work:
+
+ ```
 class FIPThread : public QThread
 {
     Q_OBJECT
@@ -284,31 +324,24 @@ private:
 
     int m_effectThreshold;
 };
-`
+```
 
-emits two different signals:
+This class emits two different signals:
 
 -   is emitted when a viewfinder frame is ready.
-
 -   is emitted when the captured image has been processed and saved.
 
- The following member variables are defined:
+The following member variables are defined:
 
--     
-    if working on a viewfinder image or if working on a full resolution image.
+-   if working on a viewfinder image or if working on a full resolution image.
+-   two [QImage](http://qt.apidoc.info/5.2.0/qtgui/qimage.html) objects are used for double buffering.
+    One buffer at position holds the latest processed image, while the other buffer is used during processing.
+    If == -1 then no processed image is available.
+-   holds the full resolution captured image (not processed). The image is automatically freed after processing.
+-   indicates whether the thread is currently processing an image.
+-   the effect’s parameter value.
 
--   , : two [QImage](http://doc.qt.nokia.com/4.7/qimage.html) objects are used for double buffering. One buffer at position holds the latest processed image, while the other buffer is used during processing. If == -1 then no processed image is available.
-
--     
-    holds the full resolution captured image (not processed). The image is automatically freed after processing.
-
--     
-    indicates whether the thread is currently processing an image.
-
--     
-    the effect’s parameter value.
-
- New viewfinder frames are added to the worker thread with the following method:
+New viewfinder frames are added to the worker thread with the following method:
  
 ```
 void FIPThread::setNewFrame(QVideoFrame *ptrFrame)
@@ -343,7 +376,6 @@ void FIPThread::setNewFrame(QVideoFrame *ptrFrame)
 ```
 
 The method copies the frame data to the locked double buffer, and starts or restarts the thread. The [QMutexLocker](http://doc.qt.nokia.com/4.7/qmutexlocker.html) is used to automatically release the mutex lock when the method is left. For full-resolution captured images the following method is used which incorporates decoding of the frame data (from usually EXIF Jpeg) to QImage: 
-
 
 ```
 void FIPThread::setFullResolutionFrame(QVideoFrame *ptrFrame)
@@ -462,14 +494,18 @@ QImage * FIPThread::getLatestProcessedImage()
 }
 ```
 
-The mutex is locked to prevent writing to the image buffer during reading. Thus, after reading it has to be released: `
+The mutex is locked to prevent writing to the image buffer during reading. Thus, after reading it has to be released:
+
+```
 void FIPThread::getLatestProcessedImageReady()
 {
     m_mutex.unlock();
 }
-`
+```
 
-Before the worker thread can be released it has to stop processing of eventual remaining work: `
+Before the worker thread can be released it has to stop processing of eventual remaining work:
+
+```
 FIPThread::~FIPThread()
 {
     // Wait for the worker thread to finish.
@@ -479,12 +515,14 @@ FIPThread::~FIPThread()
     m_mutex.unlock();
     wait();
 }
-`
+```
 
 Adding a simple black and white effect
 --------------------------------------
 
-For this sample application a simple threshold-based black and white effect is applied: `
+For this sample application a simple threshold-based black and white effect is applied:
+
+```
 bool BlackAndWhiteEffect::applyEffect(const QImage &srcImg, QImage &dstImg, const int &thresh)
 {
     // Check if in/out images match
@@ -535,21 +573,36 @@ bool BlackAndWhiteEffect::applyEffect(const QImage &srcImg, QImage &dstImg, cons
 
     return true;
 }
-`
+```
 
-First, we check if source and destination images’ metrics match. Then for each pixel the intensity is calculated. If the intensity is below a given threshold then the pixel color is set to black, else to white. Intensity is calculated by weighting the red, green, and blue color components (assuming red, green, blue are in the range between 0 and 255): `
+First, we check if source and destination images’ metrics match. Then for each pixel the intensity is calculated. If the intensity is below a given threshold then the pixel color is set to black, else to white. Intensity is calculated by weighting the red, green, and blue color components (assuming red, green, blue are in the range between 0 and 255):
+
+```
 Intensity = red*0.299 + green*0.587 + blue*0.114;
-` When image data is processed on the CPU (not GPU) then integer operations are often much faster than floating point operations (note: some compilers convert/optimize floating point operations to integer operations automatically). For image processing this can account in huge processing speed gains. Our intensity value can be calculated using only integers (at the cost of loss of accuracy): `
+```
+
+When image data is processed on the CPU (not GPU) then integer operations are often much
+ faster than floating point operations (note: some compilers convert/optimize floating point
+ operations to integer operations automatically). For image processing this can
+ account in huge processing speed gains. Our intensity value can be calculated using only
+ integers (at the cost of loss of accuracy):
+
+```
 Intensity = (red*76 + green*149 + blue*29) / 256;
-` The float values have been converted to integers by multiplication of 256. The accuracy can be increased by using higher factors than 256 but it must be paid attention to buffer overruns. Another mean to gain performance is the use of shift operations (often automatically applied by the compiler). Here the trick is for instance to get rid of multiplication and division of integers by using shifts, where "\<\<" shifts left (multiplication) and "\>\>" shifts right (division): `
+```
+
+The float values have been converted to integers by multiplication of 256.
+ The accuracy can be increased by using higher factors than 256 but it must be paid attention to buffer overruns. Another mean to gain performance is the use of shift operations (often automatically applied by the compiler). Here the trick is for instance to get rid of multiplication and division of integers by using shifts, where "\<\<" shifts left (multiplication) and "\>\>" shifts right (division):
+
+```
 Intensity = (red*76 + green*149 + blue*29) >> 8;
-`
+```
 
 ### Adding a control for live user interaction
 
 Our simple black and white effect has one parameter, a threshold, which decides which intensities are marked as black, and which ones are white. In the QML file we add a slider to control this threshold:
 
-```C++
+```
 Slider {
     id: sldThreshold
     minimumValue: 0
@@ -560,18 +613,20 @@ Slider {
 }
 ```
 
-Each time the slider’s value is changed, the component is notified which forwards the parameter to the worker thread: `
+Each time the slider’s value is changed, the component is notified which forwards the parameter to the worker thread:
+
+```
 void CustomCamera::effectThreshold(int thresh)
 {
     m_fipThread->setEffectThreshold(thresh);
 }
-` `
+
 void FIPThread::setEffectThreshold(const int &thresh)
 {
     QMutexLocker locker(&m_mutex);
     m_effectThreshold = thresh;
 }
-`
+```
 
 Discussion about hardware acceleration
 --------------------------------------
@@ -586,6 +641,7 @@ ARM assembler code using vectorization has huge performance potential but is har
 OpenGL ES shaders are compatible between different models (with small tweaks) starting with Symbian\^3 but performance is heavily affected by the time required to upload image data to the GPU. Besides, many mobile GPUs are limited memory and texture size wise allowing only small images (e.g. viewfinder size) to be easily processed. A use case for OpenGL is the live effect preview using QML 1.2 on the Nokia N9 (see [ here](#openglmeegocomment "wikilink")). Other use cases for OpenGL are effects which heavily incorporate floating point calculations which cannot be converted to integer arithmetic.
 
 The next table gives a comparison of processing and drawing times in milliseconds (ms) for ARM, OpenGL, and [CPU-based conversion](MeeGo_Camera_VideoSurface_manipulation "wikilink") of UYVY to RGBA data on a Nokia N9 PR 1.2 (mean over 300 runs; α=0.05 for t-test):
+
 
 |ARM|CPU|ARM/CPU drawing|OpenGL + drawing|OpenGL upload|
 |---|---|---------------|----------------|-------------|
@@ -606,6 +662,7 @@ This article focuses on multi-threading for user interface responsiveness by pro
 Summary
 -------
 
-This article presents a brief overview on how to apply near-real time image processing effects to a camera viewfinder using QML and how to capture full-resolution snapshots. It outlines how image processing can be moved to a worker thread and how to handle concurrent access using double buffering and mutex. Finally, optimizations are discussed.
-
-<Category:Camera> <Category:Symbian> [Category:Code Examples](Category:Code Examples "wikilink") <Category:Imaging> <Category:Qt> [Category:Qt Mobility](Category:Qt Mobility "wikilink") [Category:MeeGo Harmattan](Category:MeeGo Harmattan "wikilink") <Category:Threading> <Category:Optimization>
+This article presents a brief overview on how to apply near-real time image processing effects to
+ a camera viewfinder using QML and how to capture full-resolution snapshots. It outlines how
+ image processing can be moved to a worker thread and how to handle concurrent access using
+ double buffering and mutex. Finally, optimizations are discussed.
