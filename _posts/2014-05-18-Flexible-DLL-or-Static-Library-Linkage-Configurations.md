@@ -57,9 +57,9 @@ This is still a C/C++ DLL, and you need to export the symbols on your own.
 
 
 ### There are orthogonal macros not affected by the project creation wizard .
-Release build: NDEBUG / Debug Build: _DEBUG
-MBCS build: _MBCS / Unicode build: UNICODE _UNICODE
-Also, <ProjName>_EXPORTS controls <ProjName>_API to be either __declspec(dllexport) or __declspec(dllimport),
+* Release build: NDEBUG / Debug Build: _DEBUG
+* MBCS build: _MBCS / Unicode build: UNICODE _UNICODE
+* Also, <ProjName>_EXPORTS controls <ProjName>_API to be either __declspec(dllexport) or __declspec(dllimport),
 reference to [Exporting C++ Classes from an MFC Extension DLL]
 (http://www.codeproject.com/Articles/161/Exporting-C-Classes-from-an-MFC-Extension-DLL).
 
@@ -180,8 +180,20 @@ project, your only consequence is slower and larger client, maybe still acceptab
 Suppose in the target library we provide a class ClassT1, which has a public member function void foo().
 The client calls ClassT1::foo() in its code. We test with a few scenarios below.
 
-* We build the target library as a DLL using __declspec(dllexport), then the client imports symbols from the DLL using __declspec(dllimport). The client assembly code is call DWORD PTR __imp_?foo@ClassT1@@QAEXXZ for t1.foo(); where __imp_?foo@ClassT1@@QAEXXZ is an entry in the PE’s import address table. That entry is filled by loader when the DLL is loaded.
-* We build the target library as a DLL using __declspec(dllexport), then the client imports symbols from the DLL without using __declspec(dllimport). The client assembly code is call ?foo@ClassT1@@QAEXXZ for t1.foo(). It appears as a normal function call, as if ?foo@ClassT1@@QAEXXZ is a routine with a known address. But since the actual function lives in a DLL, this simple call will not work directly. In fact, the linker makes a thunk, an entry somewhere in the executable that ?foo@ClassT1@@QAEXXZ points to. The thunk is simply one instruction jmp DWORD PTR __imp_?foo@ClassT1@@QAEXXZ. Again, __imp_?foo@ClassT1@@QAEXXZ is an entry in the PE’s import address table, which is updated by the loader.
-* We build the target library as a static library, and the client links to it. The client assembly code is call ?foo@ClassT1@@QAEXXZ for t1.foo(). This is just a normal function call, as if the function is from the same translation unit, or same project. The linker treats the function from a static library the same as one from another object file.
+* We build the target library as a DLL using __declspec(dllexport), then the client imports symbols from
+  the DLL using __declspec(dllimport). The client assembly code is `call DWORD PTR __imp_?foo@ClassT1@@QAEXXZ`
+  for `t1.foo()`; where `__imp_?foo@ClassT1@@QAEXXZ` is an entry in the PE’s import address table.
+  That entry is filled by loader when the DLL is loaded.
+* We build the target library as a DLL using __declspec(dllexport), then the client imports symbols from
+  the DLL without using __declspec(dllimport). The client assembly code is `call ?foo@ClassT1@@QAEXXZ` for
+  `t1.foo()`. It appears as a normal function call, as if `?foo@ClassT1@@QAEXXZ` is a routine with a known
+  address. But since the actual function lives in a DLL, this simple call will not work directly. In fact,
+  the linker makes a thunk, an entry somewhere in the executable that `?foo@ClassT1@@QAEXXZ` points to. The
+  thunk is simply one instruction `jmp DWORD PTR __imp_?foo@ClassT1@@QAEXXZ`. Again, `__imp_?foo@ClassT1@@QAEXXZ`
+  is an entry in the PE’s import address table, which is updated by the loader.
+* We build the target library as a static library, and the client links to it. The client assembly code is
+  `call ?foo@ClassT1@@QAEXXZ` for `t1.foo()`. This is just a normal function call, as if the function is
+  from the same translation unit, or same project. The linker treats the function from a static library
+  the same as one from another object file.
 
 Obviously, 3 gives best performance, 1 seconds that, and 2 is the slowest.
