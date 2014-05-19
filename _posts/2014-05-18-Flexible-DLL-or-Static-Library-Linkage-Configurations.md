@@ -132,9 +132,9 @@ First of all, when building a DLL, __declspec(dllexport) is almost a must for ex
 may change in different versions of compilers, makes the .DEF hard to maintain; but __declspec(dllexport) is
  invariant.
 
-On the other side, __declspec(dllimport) is not a must for the DLL¡¯s client. If the client does not use
+On the other side, __declspec(dllimport) is not a must for the DLLâ€™s client. If the client does not use
 __declspec(dllimport), the linker has to generate a thunk to simulate a non-DLL call. The thunk itself jumps
- to an entry of the client EXE¡¯s import address table, which the loader updates when the client is loaded with
+ to an entry of the client EXEâ€™s import address table, which the loader updates when the client is loaded with
 the DLL. If the client uses __declspec(dllimport), the linker directly puts a call ptr __imp_func1 at the
 call site, where __imp_func1 is the import address entry, thus saving space and time of a thunk.
 
@@ -180,8 +180,8 @@ project, your only consequence is slower and larger client, maybe still acceptab
 Suppose in the target library we provide a class ClassT1, which has a public member function void foo().
 The client calls ClassT1::foo() in its code. We test with a few scenarios below.
 
-* We build the target library as a DLL using __declspec(dllexport), then the client imports symbols from the DLL using __declspec(dllimport). The client assembly code is call DWORD PTR __imp_?foo@ClassT1@@QAEXXZ for t1.foo(); where __imp_?foo@ClassT1@@QAEXXZ is an entry in the PE¡¯s import address table. That entry is filled by loader when the DLL is loaded.
-* We build the target library as a DLL using __declspec(dllexport), then the client imports symbols from the DLL without using __declspec(dllimport). The client assembly code is call ?foo@ClassT1@@QAEXXZ for t1.foo(). It appears as a normal function call, as if ?foo@ClassT1@@QAEXXZ is a routine with a known address. But since the actual function lives in a DLL, this simple call will not work directly. In fact, the linker makes a thunk, an entry somewhere in the executable that ?foo@ClassT1@@QAEXXZ points to. The thunk is simply one instruction jmp DWORD PTR __imp_?foo@ClassT1@@QAEXXZ. Again, __imp_?foo@ClassT1@@QAEXXZ is an entry in the PE¡¯s import address table, which is updated by the loader.
+* We build the target library as a DLL using __declspec(dllexport), then the client imports symbols from the DLL using __declspec(dllimport). The client assembly code is call DWORD PTR __imp_?foo@ClassT1@@QAEXXZ for t1.foo(); where __imp_?foo@ClassT1@@QAEXXZ is an entry in the PEâ€™s import address table. That entry is filled by loader when the DLL is loaded.
+* We build the target library as a DLL using __declspec(dllexport), then the client imports symbols from the DLL without using __declspec(dllimport). The client assembly code is call ?foo@ClassT1@@QAEXXZ for t1.foo(). It appears as a normal function call, as if ?foo@ClassT1@@QAEXXZ is a routine with a known address. But since the actual function lives in a DLL, this simple call will not work directly. In fact, the linker makes a thunk, an entry somewhere in the executable that ?foo@ClassT1@@QAEXXZ points to. The thunk is simply one instruction jmp DWORD PTR __imp_?foo@ClassT1@@QAEXXZ. Again, __imp_?foo@ClassT1@@QAEXXZ is an entry in the PEâ€™s import address table, which is updated by the loader.
 * We build the target library as a static library, and the client links to it. The client assembly code is call ?foo@ClassT1@@QAEXXZ for t1.foo(). This is just a normal function call, as if the function is from the same translation unit, or same project. The linker treats the function from a static library the same as one from another object file.
 
 Obviously, 3 gives best performance, 1 seconds that, and 2 is the slowest.
