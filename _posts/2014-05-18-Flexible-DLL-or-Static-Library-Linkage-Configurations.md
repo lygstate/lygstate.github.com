@@ -7,6 +7,7 @@ categories: []
 ---
 
 ## Introduction
+This is comes from [Binglong's space](http://binglongx.wordpress.com/2009/01/29/felxible-dllstatic-library-linkage-configurations/)
 I have some code that must build into either a DLL or a statib library depending on the project setting. That says,
 I need to write the code carefully, such that when project configuration changes I can minimize code modification,
 and make it survive in a flexibly configured project.
@@ -69,12 +70,12 @@ For all the compile time macros:
 
 * All projects have: `WIN32`. WIN32 probably means the very low-level feature of Windows, for example Kernel, that
   every project running on the OS depends on. WIN32 is defined even for 64-bit compilation according to MSDN.
-* Console applications have: _CONSOLE. Note: at link time, /SUBSYSTEM:CONSOLE option is used such that a console
+* Console applications have: `_CONSOLE`. Note: at link time, /SUBSYSTEM:CONSOLE option is used such that a console
   window is created before it enters CRT startup entry point, mainCRTStartup. CRT startup routine initializes
   C Run Time library, then calls our application entry function, normally main(). The program is a Unicode build,
   both the CRT startup entry point and our application entry function should be the Unicode version,
   wmainCRTStartup and wmain().
-* Windows applications and DLLs have: _WINDOWS. Note: at link time, /SUBSYSTEM:WINDOWS option is used. This makes sure
+* Windows applications and DLLs have: `_WINDOWS`. Note: at link time, /SUBSYSTEM:WINDOWS option is used. This makes sure
   no console window appears, and CRT is initialized, and correspondent WinMain() or DllMain() is then called when the
   EXE or DLL is loaded.
 * Static libraries have: `_LIB`. Note: static libraries does not need to specify _CONSOLE or _WINDOWS, because it alone
@@ -83,12 +84,12 @@ For all the compile time macros:
 * Regular DLLs have: `_USRDLL`. Regular DLL means that it is not a MFC extension DLL. Regular DLLs can be C or C++ DLLs. 
   C DLL is the normal case. C++ DLL is not compiler neutral due to name mangling. Regular DLLs can choose to use or not
   use MFC. Regular DLLs can also choose to use MFC in a static library or a shared DLL.
-* All projects using MFC as a shared DLL have: _AFXDLL. No matter it is a static library, DLL or application, using
+* All projects using MFC as a shared DLL have: `_AFXDLL`. No matter it is a static library, DLL or application, using
   MFC in a shared DLL needs this macro.
-* MFC extension DLLs have: `_AFXEXT _AFXDLL`. _AFXDLL is actually from the fact that an MFC extension DLL must use MFC
-  as a shared DLL. _AFXEXT makes special arrangement for these extension DLLs. There are extra requirements to write
+* MFC extension DLLs have: `_AFXEXT _AFXDLL`. `_AFXDLL` is actually from the fact that an MFC extension DLL must use MFC
+  as a shared DLL. `_AFXEXT` makes special arrangement for these extension DLLs. There are extra requirements to write
   such DLLs to work correctly. Obviously, any client using an MFC extension DLL must use MFC as a shared DLL,
-  therefore define _AFXDLL too.
+  therefore define `_AFXDLL` too.
 
 For the bold bullets above, remember that the compile time macros apply when the target static library or DLL is built.
 When the client of the target is compiled, even it includes the header files from the target, the macros applied on

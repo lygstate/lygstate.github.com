@@ -17,7 +17,7 @@ some article have same functional
 In Microsoft Visual Studio 2013, I tried the following wizard creating.
 
 * Empty Project
-    - Application (.exe)
+    * Application (.exe)
         * Use Standard Windows Libraries
             * MBCS-Debug
                 * `cl.exe` /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "_MBCS" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Project2.pch"
@@ -25,10 +25,10 @@ In Microsoft Visual Studio 2013, I tried the following wizard creating.
             * MBCS-Release
                 * `cl.exe` /GS /GL /analyze- /W3 /Gy /Zc:wchar_t /Zi /Gm- /O2 /sdl /Fd"Release\vc120.pdb" /fp:precise /D "_MBCS" /errorReport:prompt /WX- /Zc:forScope /Gd /Oy- /Oi /MD /Fa"Release\" /EHsc /nologo /Fo"Release\" /Fp"Release\Project2.pch"
                 * `link.exe` /OUT:"D:\CI\freelancer\msvc\Project2\Release\Project2.exe" /MANIFEST /LTCG /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Project2\Release\Project2.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /OPT:REF /SAFESEH /PGD:"D:\CI\freelancer\msvc\Project2\Release\Project2.pgd" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Release\Project2.exe.intermediate.manifest" /OPT:ICF /ERRORREPORT:PROMPT /NOLOGO /TLBID:1
-            * Unicode - Debug
+            * Unicode-Debug
                 * `cl.exe` /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Project2.pch"
                 * `link.exe` /OUT:"D:\CI\freelancer\msvc\Project2\Debug\Project2.exe" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Project2\Debug\Project2.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\Project2\Debug\Project2.pgd" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\Project2.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1
-            * Unicode - Release
+            * Unicode-Release
                 * `cl.exe` /GS /GL /analyze- /W3 /Gy /Zc:wchar_t /Zi /Gm- /O2 /sdl /Fd"Release\vc120.pdb" /fp:precise /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /Gd /Oy- /Oi /MD /Fa"Release\" /EHsc /nologo /Fo"Release\" /Fp"Release\Project2.pch"
                 * `link.exe` /OUT:"D:\CI\freelancer\msvc\Project2\Release\Project2.exe" /MANIFEST /LTCG /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Project2\Release\Project2.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /OPT:REF /SAFESEH /PGD:"D:\CI\freelancer\msvc\Project2\Release\Project2.pgd" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Release\Project2.exe.intermediate.manifest" /OPT:ICF /ERRORREPORT:PROMPT /NOLOGO /TLBID:1
         * Use MFC in a Static Library
@@ -39,7 +39,7 @@ In Microsoft Visual Studio 2013, I tried the following wizard creating.
             * Unicode-Release
                 * `cl.exe` /GS /GL /analyze- /W3 /Gy /Zc:wchar_t /Zi /Gm- /O2 /sdl /Fd"Release\vc120.pdb" /fp:precise /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /Gd /Oy- /Oi /MD /Fa"Release\" /EHsc /nologo /Fo"Release\" /Fp"Release\Project2.pch"
                 * `link.exe` /OUT:"D:\CI\freelancer\msvc\Project2\Release\Project2.exe" /MANIFEST /LTCG /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Project2\Release\Project2.pdb" /DYNAMICBASE /DEBUG /MACHINE:X86 /OPT:REF /SAFESEH /PGD:"D:\CI\freelancer\msvc\Project2\Release\Project2.pgd" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Release\Project2.exe.intermediate.manifest" /OPT:ICF /ERRORREPORT:PROMPT /NOLOGO /TLBID:1
-    - Dynamic Library (.dll)       
+    * Dynamic Library (.dll)       
         * Use Standard Windows Libraries
             * Unicode-Release
                 * `cl.exe` /GS /GL /analyze- /W3 /Gy /Zc:wchar_t /Zi /Gm- /O2 /sdl /Fd"Release\vc120.pdb" /fp:precise /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /Gd /Oy- /Oi /MD /Fa"Release\" /EHsc /nologo /Fo"Release\" /Fp"Release\Project2.pch"
@@ -52,7 +52,7 @@ In Microsoft Visual Studio 2013, I tried the following wizard creating.
             * Unicode-Release
                 * `cl.exe` /GS /GL /analyze- /W3 /Gy /Zc:wchar_t /Zi /Gm- /O2 /sdl /Fd"Release\vc120.pdb" /fp:precise /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /Gd /Oy- /Oi /MD /Fa"Release\" /EHsc /nologo /Fo"Release\" /Fp"Release\Project2.pch"
                 * `link.exe` /OUT:"D:\CI\freelancer\msvc\Project2\Release\Project2.dll" /MANIFEST /LTCG /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Project2\Release\Project2.pdb" /DYNAMICBASE /IMPLIB:"D:\CI\freelancer\msvc\Project2\Release\Project2.lib" /DEBUG /DLL /MACHINE:X86 /OPT:REF /SAFESEH /PGD:"D:\CI\freelancer\msvc\Project2\Release\Project2.pgd" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Release\Project2.dll.intermediate.manifest" /OPT:ICF /ERRORREPORT:PROMPT /NOLOGO /TLBID:1
-    - Static library (.lib)   
+    * Static library (.lib)   
         * Use Standard Windows Libraries
             * Unicode-Release
                 * `cl.exe` /GS /GL /analyze- /W3 /Gy /Zc:wchar_t /Zi /Gm- /O2 /sdl /Fd"Release\vc120.pdb" /fp:precise /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /Gd /Oy- /Oi /MD /Fa"Release\" /EHsc /nologo /Fo"Release\" /Fp"Release\Project2.pch"
@@ -65,9 +65,77 @@ In Microsoft Visual Studio 2013, I tried the following wizard creating.
             * Unicode-Release
                 * `cl.exe` /GS /GL /analyze- /W3 /Gy /Zc:wchar_t /Zi /Gm- /O2 /sdl /Fd"Release\vc120.pdb" /fp:precise /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /Gd /Oy- /Oi /MD /Fa"Release\" /EHsc /nologo /Fo"Release\" /Fp"Release\Project2.pch"
                 * `link.exe` /OUT:"D:\CI\freelancer\msvc\Project2\Release\Project2.lib" /MANIFEST /LTCG /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Project2\Release\Project2.pdb" /DYNAMICBASE /DEBUG /MACHINE:X86 /OPT:REF /SAFESEH /PGD:"D:\CI\freelancer\msvc\Project2\Release\Project2.pgd" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Release\Project2.lib.intermediate.manifest" /OPT:ICF /ERRORREPORT:PROMPT /NOLOGO /TLBID:1
+* Win32Project->Windows Application.exe
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Win32Project10.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project10\Debug\Win32Project10.exe" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Win32Project10\Debug\Win32Project10.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\Win32Project10\Debug\Win32Project10.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\Win32Project10.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+    * Unicode-Release
+        * `cl.exe` /Yu"stdafx.h" /GS /GL /analyze- /W3 /Gy /Zc:wchar_t /Zi /Gm- /O2 /sdl /Fd"Release\vc120.pdb" /fp:precise /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /Gd /Oy- /Oi /MD /Fa"Release\" /EHsc /nologo /Fo"Release\" /Fp"Release\Win32Project10.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project10\Release\Win32Project10.exe" /MANIFEST /LTCG /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Win32Project10\Release\Win32Project10.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /OPT:REF /SAFESEH /INCREMENTAL:NO /PGD:"D:\CI\freelancer\msvc\Win32Project10\Release\Win32Project10.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Release\Win32Project10.exe.intermediate.manifest" /OPT:ICF /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* Win32Project->Windows Application.exe->ATL (So ATL affect nothing, MFC can not used with this, So ATL doesn't affect cl and link options)
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Win32Project11.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project11\Debug\Win32Project11.exe" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Win32Project11\Debug\Win32Project11.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\Win32Project11\Debug\Win32Project11.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\Win32Project11.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+    * Unicode-Release
+        * `cl.exe` /Yu"stdafx.h" /GS /GL /analyze- /W3 /Gy /Zc:wchar_t /Zi /Gm- /O2 /sdl /Fd"Release\vc120.pdb" /fp:precise /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /Gd /Oy- /Oi /MD /Fa"Release\" /EHsc /nologo /Fo"Release\" /Fp"Release\Win32Project11.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project11\Release\Win32Project11.exe" /MANIFEST /LTCG /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Win32Project11\Release\Win32Project11.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /OPT:REF /SAFESEH /INCREMENTAL:NO /PGD:"D:\CI\freelancer\msvc\Win32Project11\Release\Win32Project11.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Release\Win32Project11.exe.intermediate.manifest" /OPT:ICF /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* Win32Project->Console Application.exe (vs2013 bug, _LIB should disappear)
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_LIB" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Win32Project22.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project22\Debug\Win32Project22.exe" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Win32Project22\Debug\Win32Project22.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\Win32Project22\Debug\Win32Project22.pgd" /SUBSYSTEM:CONSOLE /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\Win32Project22.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* Win32Project->Console Application.exe->ATL (vs2013 bug, _LIB should disappear)
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_LIB" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Win32Project23.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project23\Debug\Win32Project23.exe" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Win32Project23\Debug\Win32Project23.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\Win32Project23\Debug\Win32Project23.pgd" /SUBSYSTEM:CONSOLE /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\Win32Project23.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1
+* Win32Project->Console Application.exe->(ATL + MFC) (vs2013 bug, _LIB should disappear)
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_LIB" /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Win32Project24.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project24\Debug\Win32Project24.exe" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Win32Project24\Debug\Win32Project24.pdb" /DYNAMICBASE /DEBUG /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\Win32Project24\Debug\Win32Project24.pgd" /SUBSYSTEM:CONSOLE /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\Win32Project24.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* Win32Project->DLL
+    * Unicode-Debug
+        * `cl.exe`
+        * `link.exe` 
+* Win32Project->DLL->ATL
+    * Unicode-Debug
+        * `cl.exe`
+        * `link.exe` 
+* Win32Project->DLL->ATL+MFC
+    * Unicode-Debug
+        * `cl.exe`
+        * `link.exe` 
+* Win32Project->DLL->ATL+MFC
+    * Unicode-Debug
+        * `cl.exe`
+        * `link.exe` 
+* Win32Project->DLL->ATL+MFC
+    * Unicode-Debug
+        * `cl.exe`
+        * `link.exe` 
+* Win32Project->DLL->ATL+MFC
+    * Unicode-Debug
+        * `cl.exe`
+        * `link.exe` 
+* Win32Project->DLL->ATL+MFC
+    * Unicode-Debug
+        * `cl.exe`
+        * `link.exe` 
+* Win32Project->DLL->ATL+MFC
+    * Unicode-Debug
+        * `cl.exe`
+        * `link.exe` 
 *
 *
 *
-            * Unicode-Release
-                * `cl.exe`
-                * `link.exe` 
+*
+*
+*
+*
+*
+*
+* Win32Project->Windows Application.exe->ATL (So ATL affect nothing)
+    * Unicode-Debug
+        * `cl.exe`
+        * `link.exe` 
+    * Unicode-Release
+        * `cl.exe`
+        * `link.exe` 
