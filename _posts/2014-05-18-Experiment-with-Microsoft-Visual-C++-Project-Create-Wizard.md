@@ -93,46 +93,82 @@ In Microsoft Visual Studio 2013, I tried the following wizard creating.
         * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project24\Debug\Win32Project24.exe" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Win32Project24\Debug\Win32Project24.pdb" /DYNAMICBASE /DEBUG /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\Win32Project24\Debug\Win32Project24.pgd" /SUBSYSTEM:CONSOLE /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\Win32Project24.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
 * Win32Project->DLL
     * Unicode-Debug
-        * `cl.exe`
-        * `link.exe` 
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "WIN32PROJECT25_EXPORTS" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Win32Project25.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project25\Debug\Win32Project25.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Win32Project25\Debug\Win32Project25.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /IMPLIB:"D:\CI\freelancer\msvc\Win32Project25\Debug\Win32Project25.lib" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\Win32Project25\Debug\Win32Project25.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\Win32Project25.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
 * Win32Project->DLL->ATL
     * Unicode-Debug
-        * `cl.exe`
-        * `link.exe` 
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "WIN32PROJECT26_EXPORTS" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Win32Project26.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project26\Debug\Win32Project26.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Win32Project26\Debug\Win32Project26.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /IMPLIB:"D:\CI\freelancer\msvc\Win32Project26\Debug\Win32Project26.lib" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\Win32Project26\Debug\Win32Project26.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\Win32Project26.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
 * Win32Project->DLL->ATL+MFC
     * Unicode-Debug
-        * `cl.exe`
-        * `link.exe` 
-* Win32Project->DLL->ATL+MFC
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "WIN32PROJECT27_EXPORTS" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Win32Project27.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project27\Debug\Win32Project27.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\Win32Project27\Debug\Win32Project27.pdb" /DYNAMICBASE /IMPLIB:"D:\CI\freelancer\msvc\Win32Project27\Debug\Win32Project27.lib" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\Win32Project27\Debug\Win32Project27.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\Win32Project27.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* Win32Project->Static Library
     * Unicode-Debug
-        * `cl.exe`
-        * `link.exe` 
-* Win32Project->DLL->ATL+MFC
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_DEBUG" /D "_LIB" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Win32Project28.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project28\Debug\Win32Project28.lib" /NOLOGO 
+* Win32Project->Static Library->MFC ( Can not check ATL)
     * Unicode-Debug
-        * `cl.exe`
-        * `link.exe` 
-* Win32Project->DLL->ATL+MFC
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_DEBUG" /D "_LIB" /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\Win32Project29.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\Win32Project29\Debug\Win32Project29.lib" /NOLOGO 
+* ATL Project->Proxy Project (Use by every ATL Project without Stub)  Compiling IDL files
     * Unicode-Debug
-        * `cl.exe`
-        * `link.exe` 
-* Win32Project->DLL->ATL+MFC
+        * `cl.exe` /GS /analyze- /W1 /Zc:wchar_t /ZI /Gm /Od /Fd"DebugPS\vc120.pdb" /fp:precise /D "WIN32" /D "REGISTER_PROXY_DLL" /D "_DEBUG" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"DebugPS\" /EHsc /nologo /Fo"DebugPS\" /Fp"DebugPS\ATLProject6PS.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\ATLProject6\Debug\ATLProject6PS.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\ATLProject6\Debug\ATLProject6PS.pdb" /DYNAMICBASE "kernel32.lib" "rpcns4.lib" "rpcrt4.lib" "oleaut32.lib" "uuid.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "odbc32.lib" "odbccp32.lib" /DEF:"ATLProject6PS.def" /IMPLIB:"D:\CI\freelancer\msvc\ATLProject6\Debug\ATLProject6PS.lib" /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\ATLProject6\Debug\ATLProject6PS.pgd" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"DebugPS\ATLProject6PS.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* ATL Project->DLL
     * Unicode-Debug
-        * `cl.exe`
-        * `link.exe` 
-* Win32Project->DLL->ATL+MFC
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_USRDLL" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\ATLProject6.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\ATLProject6\Debug\ATLProject6.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\ATLProject6\Debug\ATLProject6.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEF:".\ATLProject6.def" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\ATLProject6\Debug\ATLProject6.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\ATLProject6.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* ATL Project->DLL->Stub  (Check Stub means no separate Proxy Project)
     * Unicode-Debug
-        * `cl.exe`
-        * `link.exe` 
-*
-*
-*
-*
-*
-*
-*
-*
-*
-* Win32Project->Windows Application.exe->ATL (So ATL affect nothing)
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_USRDLL" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\ATLProject7.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\ATLProject7\Debug\ATLProject7.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\ATLProject7\Debug\ATLProject7.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEF:".\ATLProject7.def" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\ATLProject7\Debug\ATLProject7.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\ATLProject7.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* ATL Project->DLL->COM 1.0
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_USRDLL" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\ATLProject8.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\ATLProject8\Debug\ATLProject8.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\ATLProject8\Debug\ATLProject8.pdb" /DYNAMICBASE "comsvcs.lib" "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEF:".\ATLProject8.def" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\ATLProject8\Debug\ATLProject8.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\ATLProject8.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* ATL Project->DLL->MFC
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_USRDLL" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\ATLProject9.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\ATLProject9\Debug\ATLProject9.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\ATLProject9\Debug\ATLProject9.pdb" /DYNAMICBASE /DEF:".\ATLProject9.def" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\ATLProject9\Debug\ATLProject9.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\ATLProject9.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* ATL Project->Executable
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\ATLProject11.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\ATLProject11\Debug\ATLProject11.exe" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\ATLProject11\Debug\ATLProject11.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\ATLProject11\Debug\ATLProject11.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\ATLProject11.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* ATL Project->Executable->Stub (Check Stub means no separate Proxy Project)
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\ATLProject12.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\ATLProject12\Debug\ATLProject12.exe" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\ATLProject12\Debug\ATLProject12.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\ATLProject12\Debug\ATLProject12.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\ATLProject12.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* ATL Project->Service Executable
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\ATLProject13.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\ATLProject13\Debug\ATLProject13.exe" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\ATLProject13\Debug\ATLProject13.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /DEBUG /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\ATLProject13\Debug\ATLProject13.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\ATLProject13.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* MFC Application
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\MFCApplication1.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\MFCApplication1\Debug\MFCApplication1.exe" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\MFCApplication1\Debug\MFCApplication1.pdb" /DYNAMICBASE /DEBUG /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\MFCApplication1\Debug\MFCApplication1.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\MFCApplication1.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* MFC Active Control
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_USRDLL" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\MFCActiveXControl3.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\MFCActiveXControl3\Debug\MFCActiveXControl3.ocx" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\MFCActiveXControl3\Debug\MFCActiveXControl3.pdb" /DYNAMICBASE /DEF:".\MFCActiveXControl3.def" /IMPLIB:"D:\CI\freelancer\msvc\MFCActiveXControl3\Debug\MFCActiveXControl3.lib" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\MFCActiveXControl3\Debug\MFCActiveXControl3.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\MFCActiveXControl3.ocx.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* MFC->DLL->Shared Rule
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_USRDLL" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\MFCLibrary5.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\MFCLibrary5\Debug\MFCLibrary5.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\MFCLibrary5\Debug\MFCLibrary5.pdb" /DYNAMICBASE /DEF:".\MFCLibrary5.def" /IMPLIB:"D:\CI\freelancer\msvc\MFCLibrary5\Debug\MFCLibrary5.lib" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\MFCLibrary5\Debug\MFCLibrary5.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\MFCLibrary5.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* MFC->DLL->Link with Shared MFC dll
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_USRDLL" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\MFCLibrary5.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\MFCLibrary5\Debug\MFCLibrary5.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\MFCLibrary5\Debug\MFCLibrary5.pdb" /DYNAMICBASE /DEF:".\MFCLibrary5.def" /IMPLIB:"D:\CI\freelancer\msvc\MFCLibrary5\Debug\MFCLibrary5.lib" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\MFCLibrary5\Debug\MFCLibrary5.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\MFCLibrary5.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* MFC->DLL->Link with Static MFC dll
+    * Unicode-Debug
+        * `cl.exe` /Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_USRDLL" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MTd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\MFCLibrary6.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\MFCLibrary6\Debug\MFCLibrary6.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\MFCLibrary6\Debug\MFCLibrary6.pdb" /DYNAMICBASE /DEF:".\MFCLibrary6.def" /IMPLIB:"D:\CI\freelancer\msvc\MFCLibrary6\Debug\MFCLibrary6.lib" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\MFCLibrary6\Debug\MFCLibrary6.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\MFCLibrary6.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+* MFC->DLL->Extension of MFC DLL
+    * Unicode-Debug
+        * `cl.exe` //Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_AFXEXT" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\MFCLibrary7.pch" 
+        * `link.exe` /OUT:"D:\CI\freelancer\msvc\MFCLibrary7\Debug\MFCLibrary7.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\MFCLibrary7\Debug\MFCLibrary7.pdb" /DYNAMICBASE /DEF:".\MFCLibrary7.def" /IMPLIB:"D:\CI\freelancer\msvc\MFCLibrary7\Debug\MFCLibrary7.lib" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\MFCLibrary7\Debug\MFCLibrary7.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\MFCLibrary7.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
+
+* 
     * Unicode-Debug
         * `cl.exe`
         * `link.exe` 
