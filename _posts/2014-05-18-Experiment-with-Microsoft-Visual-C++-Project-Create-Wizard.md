@@ -163,11 +163,3 @@ In Microsoft Visual Studio 2013, I tried the following wizard creating.
     * Unicode-Debug
         * `cl.exe` //Yu"stdafx.h" /GS /analyze- /W3 /Zc:wchar_t /ZI /Gm /Od /sdl /Fd"Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "_AFXEXT" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /D "_AFXDLL" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" /EHsc /nologo /Fo"Debug\" /Fp"Debug\MFCLibrary7.pch" 
         * `link.exe` /OUT:"D:\CI\freelancer\msvc\MFCLibrary7\Debug\MFCLibrary7.dll" /MANIFEST /NXCOMPAT /PDB:"D:\CI\freelancer\msvc\MFCLibrary7\Debug\MFCLibrary7.pdb" /DYNAMICBASE /DEF:".\MFCLibrary7.def" /IMPLIB:"D:\CI\freelancer\msvc\MFCLibrary7\Debug\MFCLibrary7.lib" /DEBUG /DLL /MACHINE:X86 /INCREMENTAL /PGD:"D:\CI\freelancer\msvc\MFCLibrary7\Debug\MFCLibrary7.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\MFCLibrary7.dll.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1 
-
-* 
-    * Unicode-Debug
-        * `cl.exe`
-        * `link.exe` 
-    * Unicode-Release
-        * `cl.exe`
-        * `link.exe` 
