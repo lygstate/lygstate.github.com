@@ -41,7 +41,7 @@ Our recommended install order is:
   mu_visual_studio_2010_sp1_x86_dvd_651704.iso
 
 5.Microsoft Visual C++ 2010 Service Pack 1 Compiler Update for the Windows SDK 7.1
-  https://www.microsoft.com/en-us/download/details.aspx?id=4422
+  2011-03-20 https://www.microsoft.com/en-us/download/details.aspx?id=4422
   IDE/Microsoft SDKs/Windows SDK 7.1/VC-Compiler-KB2519277.exe
 
 6.Microsoft Visual Studio 2010 Service Pack 1 MFC Security Update
@@ -50,7 +50,6 @@ Our recommended install order is:
 
 Visual C++ 2010 SP1 Compiler Update for the Windows SDK 7.1
 You must have installed Windows SDK 7.1 in order to install the update.  However, you do NOT have to have installed VS 2010 + SP1 – this update is also applicable to the standalone SDK.
-
 ## Failure recovery
   If installing failed, you may uninstall Visual Studio 2010 first.
   https://blogs.msdn.microsoft.com/heaths/2010/08/23/visual-studio-2010-uninstall-utility/
