@@ -42,3 +42,7 @@ Our recommended install order is:
 
 Visual C++ 2010 SP1 Compiler Update for the Windows SDK 7.1
 You must have installed Windows SDK 7.1 in order to install the update.  However, you do NOT have to have installed VS 2010 + SP1 – this update is also applicable to the standalone SDK.
+
+## Failure recovery
+  If installing failed, you may uninstall Visual Studio 2010 first.
+  https://blogs.msdn.microsoft.com/heaths/2010/08/23/visual-studio-2010-uninstall-utility/
