@@ -46,14 +46,14 @@ categories: [docker,wsl2,without,desktop]
   5. Configure dockerd
 
       ```bash
-      DOCKER_DIR=/mnt/wsl/shared-docker
+      DOCKER_DIR=/var/wsl/shared-docker
       mkdir -pm o=,ug=rwx "$DOCKER_DIR"
       sudo chgrp docker "$DOCKER_DIR"
       sudo mkdir /etc/docker
       sudo <your_text_editor> /etc/docker/daemon.json
 
       {
-        "hosts": ["unix:///mnt/wsl/shared-docker/docker.sock"]
+        "hosts": ["unix:///var/wsl/shared-docker/docker.sock"]
       }
       ```
 
@@ -62,11 +62,11 @@ categories: [docker,wsl2,without,desktop]
 
 * Now you’re ready to launch dockerd and see if it works
 
-  1. Run command “sudo dockerd” - if the command ends with “API listen on /mnt/wsl/shared-docker/docker.sock”, things are working
+  1. Run command `sudo dockerd` - if the command ends with `API listen on /var/wsl/shared-docker/docker.sock`, things are working
   2. You can perform an additional test by opening a new terminal and running
 
       ```bash
-      docker -H unix:///mnt/wsl/shared-docker/docker.sock run --rm hello-world
+      docker -H unix:///var/wsl/shared-docker/docker.sock run --rm hello-world
       ```
 
 * Ok, things are working? Great!
@@ -78,7 +78,7 @@ Then it’s time to create a launch script for dockerd. There are two options, m
 
       ```bash
       DOCKER_DISTRO="Ubuntu-20.04"
-      DOCKER_DIR=/mnt/wsl/shared-docker
+      DOCKER_DIR=/var/wsl/shared-docker
       DOCKER_SOCK="$DOCKER_DIR/docker.sock"
       export DOCKER_HOST="unix://$DOCKER_SOCK"
       if [ ! -S "$DOCKER_SOCK" ]; then
@@ -92,7 +92,7 @@ Then it’s time to create a launch script for dockerd. There are two options, m
     Add the following to your .bashrc or .profile
 
       ```bash
-      DOCKER_SOCK="/mnt/wsl/shared-docker/docker.sock"
+      DOCKER_SOCK="/var/wsl/shared-docker/docker.sock"
       test -S "$DOCKER_SOCK" && export DOCKER_HOST="unix://$DOCKER_SOCK"
       ```
 
