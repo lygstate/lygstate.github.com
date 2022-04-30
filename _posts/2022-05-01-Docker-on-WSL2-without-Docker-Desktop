@@ -57,8 +57,11 @@ categories: [docker,wsl2,without,desktop]
       }
       ```
 
-   Note! Debian will also need the additional configuration to the same file
-    "iptables": false
+    Note! Debian will also need the additional configuration to the same file
+      "iptables": false
+  6. iptables fixes on ubuntu
+    Refer to [WSL fixes for native docker]<https://patrickwu.space/2021/03/09/wsl-solution-to-native-docker-daemon-not-starting/>
+    The WSL issue is at [6044]<https://github.com/microsoft/WSL/issues/6044>
 
 * Now you’re ready to launch dockerd and see if it works
 
